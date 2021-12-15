@@ -65,6 +65,15 @@ public:
         tmp.i = this->i + indx;
         return (tmp);
     }
+    template<typename S>
+    friend iter<S> operator+ (S index ,  iter<S> in);
+
+    // {
+    //     // iter<T> tmp;
+    //         ;
+    //     // tmp.i = this->i + indx;
+    //     // return (tmp);
+    // }
 
     iter<T> operator- (T indx)
     {
@@ -73,4 +82,24 @@ public:
         tmp.i = this->i - indx;
         return (tmp);
     }
+    template<typename S>
+    friend iter<S> operator- (S index ,  iter<S> in);
 };
+
+template<class T>
+iter<T> operator+ (T index , iter<T> in)
+{
+    // iter<T> tmp;
+
+    in.i = in.i + index;
+    return (in);
+}
+
+template<class T>
+iter<T> operator- (T index , iter<T> in)
+{
+    // iter<T> tmp;
+
+    in.i = in.i - index;
+    return (in);
+}

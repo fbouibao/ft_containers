@@ -8,11 +8,15 @@ int main ()
 {
     vector<int> a(5, 15);
     a.ptr[2] = 1111111;
-    vector<int>::iterator it = a.begin() + 2;
+    vector<int>::iterator it =  2 + a.begin()  ;
+     vector<int>::iterator it2 = a.begin();
     std::vector<int> b(5 , 15); 
     // int b;
 // // std::cout << w.max_size() << std::endl;
+std::cout << *it++ << std::endl;
 std::cout << *it << std::endl;
+std::cout << *it2 << std::endl;
+
 // std::cout << a.max_size() << std::endl;
 // std::cout << b.max_size() << std::endl;
 a.ptr[4] = 20;
