@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <memory>
+#include "iter.hpp"
 
 template <class T, class alocator = std::allocator<T> >
 class vector
@@ -8,12 +9,19 @@ class vector
 private:
 
 public:
+    typedef iter<T> iterator;
     T *ptr;
     size_t s;
     vector()
     {
 
     }
+
+    
+
+
+
+
 
     vector(size_t size)
     {
@@ -39,22 +47,27 @@ public:
     {
 
     }
-    T* begin()
-    {
-        return (&ptr[0]);
-    }
-    T* end()
-    {
-        return (&ptr[this->size]);
-    }
-    T* rbegin()
-    {
-        return (&ptr[this->s - 1]);
-    }
-    T* rend()
-    {
-        return (&ptr[-1]);
-    }
+
+
+        iterator begin()
+        {
+            return (iterator(ptr));
+        }
+
+        iterator end()
+        {
+            return (iterator(ptr + s));
+        }
+
+        // iterator rbegin()
+        // {
+        //     return (&ptr[this->s - 1]);
+        // }
+
+        // iterator rend()
+        // {
+        //     return (&ptr[-1]);
+        // }
 
     size_t size()
     {
