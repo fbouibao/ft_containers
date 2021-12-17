@@ -58,6 +58,18 @@ public:
         return (*this);
     }
 
+    iter<T> operator+= (T indx)
+    {
+        this->i = this->i + indx;
+        return (*this);
+    }
+
+    iter<T> operator-= (T indx)
+    {
+        this->i = this->i - indx;
+        return (*this);
+    }
+
     iter<T> operator+ (T indx)
     {
         iter<T> tmp;
@@ -65,15 +77,10 @@ public:
         tmp.i = this->i + indx;
         return (tmp);
     }
+
+  
     template<typename S>
     friend iter<S> operator+ (S index ,  iter<S> in);
-
-    // {
-    //     // iter<T> tmp;
-    //         ;
-    //     // tmp.i = this->i + indx;
-    //     // return (tmp);
-    // }
 
     iter<T> operator- (T indx)
     {
@@ -82,8 +89,45 @@ public:
         tmp.i = this->i - indx;
         return (tmp);
     }
+
     template<typename S>
     friend iter<S> operator- (S index ,  iter<S> in);
+
+    bool operator== (iter<T> i)
+    {
+        return (this->i == i.i);
+    }
+
+    bool operator!= (iter<T> i)
+    {
+        return (this->i != i.i);
+    }
+
+
+    bool operator< (const iter<T> &i)
+    {
+        return (this->i < i.i);
+    }
+
+    bool operator> (const iter<T> &i)
+    {
+        return (this->i > i.i);
+    }
+
+    bool operator<= (const iter<T> &i)
+    {
+        return (this->i <= i.i);
+    }
+
+    bool operator>= (const iter<T> &i)
+    {
+        return (this->i >= i.i);
+    }
+
+    T& operator[](int)
+    {
+          
+    }
 };
 
 template<class T>
