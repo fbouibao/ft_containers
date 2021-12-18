@@ -124,10 +124,10 @@ public:
         return (this->i >= i.i);
     }
 
-    // T& operator[](int)
-    // {
-          
-    // }
+    T& operator[](T indx)
+    {
+        return (this->i[indx]);
+    }
 };
 
 template<class T>
