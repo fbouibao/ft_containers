@@ -6,6 +6,7 @@
 int main ()
 {
   std::vector<int> myvector;
+  std::vector<int>::reverse_iterator it;
   myvector.push_back (100);
   myvector.push_back (200);
   myvector.push_back (300);

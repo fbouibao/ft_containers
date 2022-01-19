@@ -1,149 +1,180 @@
 #include <iostream>
 #include <memory>
+#include "iterator_traits.hpp"
 
-template<class T>
-class iter
-{
-private:
-    T *i;
-public:
-    iter()
+
+namespace ft{
+
+    template<class T>
+    class iter
     {
+        public:
+            typedef T					                                iterator_type;
+			typedef typename ft::iterator_traits<T>::value_type			value_type;
+			typedef typename ft::iterator_traits<T>::pointer			pointer;
+			typedef typename ft::iterator_traits<T>::reference			reference;
+			typedef typename ft::iterator_traits<T>::difference_type	difference_type;
+			typedef typename ft::iterator_traits<T>::iterator_category  iterator_category;
 
-    }
-    iter(T *i)
+
+    private:
+        iterator_type itr;
+
+    public:
+        // constructors
+        iter() : itr(NULL) { }
+        explicit iter(iterator_type it) : itr(it) { }
+        template<typename it2>
+        iter(const iter<it2> &i) : itr(i.base()){ }
+
+        // getter
+        iterator_type base() const
+        {
+            return (this->itr);
+        }
+
+        // operators
+
+        iter& operator=(const iter& i)
+        {
+            this->itr = i.itr;
+            return (*this);
+        }
+
+        reference operator*()
+        {
+            return *this->itr;
+        }
+
+        pointer operator->()
+        {
+            return this->itr;
+        }
+
+        iter& operator++()
+        {
+            ++this->itr;
+            return (*this);
+        }
+
+        iter operator++(int)
+        {
+            iter tmp;
+
+            tmp.itr = this->itr++;
+            return (tmp);
+        }
+
+        iter& operator--()
+        {
+            --this->itr;
+            return (*this);
+        }
+
+        iter operator--(int)
+        {
+            iter tmp;
+
+            tmp.itr = this->itr--;
+            return (tmp);
+        }
+
+        iter operator+ (difference_type indx)
+        {
+            iter tmp;
+
+            tmp.itr = this->itr + indx;
+            return (tmp);
+        }
+
+        iter operator-(difference_type indx)  const
+        {
+            return (iter(this->itr - indx));
+        }
+
+        iter &operator+= (difference_type indx)
+        {
+            this->itr = this->itr + indx;
+            return (*this);
+        }
+
+        iter &operator-= (difference_type indx)
+        {
+            this->itr = this->itr - indx;
+            return (*this);
+        }
+
+        reference operator[] (difference_type indx)
+        {
+            return (this->itr[indx]);
+        }
+
+        template<class it1, class it2>
+        friend bool operator== (const iter<it1> &ob1, const iter<it2> &ob2);
+
+        template<class it1, class it2>
+        friend bool operator!= (const iter<it1> &ob1, const iter<it2> &ob2);
+
+        template<class it1, class it2>
+        friend bool operator> (const iter<it1> &ob1, const iter<it2> &ob2);
+
+        template<class it1, class it2>
+        friend bool operator< (const iter<it1> &ob1, const iter<it2> &ob2);
+
+        template<class it1, class it2>
+        friend bool operator>= (const iter<it1> &ob1, const iter<it2> &ob2);
+
+        template<class it1, class it2>
+        friend bool operator<= (const iter<it1> &ob1, const iter<it2> &ob2);
+
+        template<class it1, class it2>
+        friend typename iter<it1>::difference_type operator-(const iter<it1> &a, const iter<it2> &b);
+
+
+        template<class it>
+        friend iter<it> operator+(typename iter<it>::difference_type a, const iter<it> &b);
+
+   };
+
+    template<class it1, class it2>
+    bool operator== (const iter<it1> &ob1, const iter<it2> &ob2)
     {
-       this->i = i; 
+        return (ob1.base() == ob2.base());
     }
-    ~iter(){}
-    // iter *operator=(const iter *f)
-    // {
-    //     this->i = f;
-    // }
-
-
-
-    T& operator*()
+    template<class it1, class it2>
+    bool operator!= (const iter<it1> &ob1, const iter<it2> &ob2)
     {
-        // this->i = f.;
-        return *this->i;
+        return (ob1.base() != ob2.base());
     }
-
-    iter<T> operator++ (int)
+    template<class it1, class it2>
+    bool operator> (const iter<it1> &ob1, const iter<it2> &ob2)
     {
-        iter<T> tmp;
-
-        tmp.i = this->i++;
-        return (tmp);
+        return (ob1.base() > ob2.base());
     }
-
-    iter<T> operator++ ()
+    template<class it1, class it2>
+    bool operator< (const iter<it1> &ob1, const iter<it2> &ob2)
     {
-        ++this->i;
-        return (*this);
+        return (ob1.base() < ob2.base());
     }
-
-
-    iter<T> operator-- (int)
+    template<class it1, class it2>
+    bool operator>= (const iter<it1> &ob1, const iter<it2> &ob2)
     {
-        iter<T> tmp;
-
-        tmp.i = this->i--;
-        return (tmp);
+        return (ob1.base() >= ob2.base());
     }
-
-    iter<T> operator-- ()
+    template<class it1, class it2>
+    bool operator<= (const iter<it1> &ob1, const iter<it2> &ob2)
     {
-        --this->i;
-        return (*this);
+        return (ob1.base() <= ob2.base());
     }
-
-    iter<T> operator+= (T indx)
+    template<class it1, class it2>
+    typename iter<it1>::difference_type operator-(const iter<it1> &a, const iter<it2> &b)
     {
-        this->i = this->i + indx;
-        return (*this);
+        return (a.base() - b.base());
     }
-
-    iter<T> operator-= (T indx)
+    template<class it>
+    iter<it> operator+(typename iter<it>::difference_type a, const iter<it> &b)
     {
-        this->i = this->i - indx;
-        return (*this);
+        return (iter<it>(a + b.base()));
     }
 
-    iter<T> operator+ (T indx)
-    {
-        iter<T> tmp;
-
-        tmp.i = this->i + indx;
-        return (tmp);
-    }
-
-  
-    template<typename S>
-    friend iter<S> operator+ (S index ,  iter<S> in);
-
-    iter<T> operator- (T indx)
-    {
-        iter<T> tmp;
-
-        tmp.i = this->i - indx;
-        return (tmp);
-    }
-
-    template<typename S>
-    friend iter<S> operator- (S index ,  iter<S> in);
-
-    bool operator== (iter<T> i)
-    {
-        return (this->i == i.i);
-    }
-
-    bool operator!= (iter<T> i)
-    {
-        return (this->i != i.i);
-    }
-
-
-    bool operator< (const iter<T> &i)
-    {
-        return (this->i < i.i);
-    }
-
-    bool operator> (const iter<T> &i)
-    {
-        return (this->i > i.i);
-    }
-
-    bool operator<= (const iter<T> &i)
-    {
-        return (this->i <= i.i);
-    }
-
-    bool operator>= (const iter<T> &i)
-    {
-        return (this->i >= i.i);
-    }
-
-    T& operator[](T indx)
-    {
-        return (this->i[indx]);
-    }
-};
-
-template<class T>
-iter<T> operator+ (T index , iter<T> in)
-{
-    // iter<T> tmp;
-
-    in.i = in.i + index;
-    return (in);
-}
-
-template<class T>
-iter<T> operator- (T index , iter<T> in)
-{
-    // iter<T> tmp;
-
-    in.i = in.i - index;
-    return (in);
 }
