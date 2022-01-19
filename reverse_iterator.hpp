@@ -43,7 +43,7 @@ namespace ft{
 
         reference operator*()
         {
-            return (*(this->rvi));
+            return (*(this->rvi - 1));
         }
 
         pointer operator->()
@@ -106,7 +106,7 @@ namespace ft{
 
         reference operator[] (difference_type indx)
         {
-            return (this->rvi[indx]);
+            return (this->rvi[indx - 1]);
         }
 
         template<class it1, class it2>
@@ -169,12 +169,12 @@ namespace ft{
     template<class it1, class it2>
     typename reverse_iterator<it1>::difference_type operator-(const reverse_iterator<it1> &a, const reverse_iterator<it2> &b)
     {
-        return (a.base() - b.base());
+        return (b.base() - a.base());
     }
     template<class it>
     reverse_iterator<it> operator+(typename reverse_iterator<it>::difference_type a, const reverse_iterator<it> &b)
     {
-        return (reverse_iterator<it>(a - b.base()));
+        return (reverse_iterator<it>(b.base() - a));
     }
 
 
