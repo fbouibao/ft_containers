@@ -3,6 +3,7 @@
 #include <memory>
 #include "iter.hpp"
 #include "reverse_iterator.hpp"
+#include "enable_type.hpp"
 
 
 namespace ft{
@@ -29,44 +30,10 @@ namespace ft{
         size_type       _capacity;
         allocator_type  _alloc;
         
-        // vector()
-        // {
-
-        // }
-
-        
-
-
-
-
-
-        // vector(size_t size)
-        // {
-        //     this->s = size;
-        //     alocator a;
-        //     ptr = a.allocate(this->s);
-        //     for (int i = 0; i < size; i++)
-        //     {
-        //         ptr[i] = 0;
-        //     }
-        // }
-        // vector(size_t size, T ins)
-        // { 
-        //     this->s = size;
-        //     alocator a;
-        //     ptr = a.allocate(this->s);
-        //     for (int i = 0; i < size; i++)
-        //     {
-        //         ptr[i] = ins;
-        //     }
-        // }
-        // ~vector()
-        // {
-
-        // }
-
 
     public:
+
+        //constructors
         explicit vector (const allocator_type& alloc = allocator_type())
         {
             this->size = 0;
@@ -87,47 +54,80 @@ namespace ft{
             }
         }
             
-        // template <class InputIterator>
-        // vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
-        // {
-
-        // }
+        template <class InputIterator>
+        vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename enable_if<!is_integral<InputIterator>::value, InputIterator>::type = InputIterator())
+        {
+            size_type d = (size_type)std::distane(first, last);
+            this->_size = d;
+            this->_capacity = d;
+            this->_array = NULL;
+            this->_alloc = alloc;
+            this->_array = this->_alloc.allocate(d);
+            for (size_type i = 0; i < d; i++)
+            {
+                this->_alloc.construct(this->_array + i, *(first + i));
+            }
+        }
             
         vector (const vector& x)
         {
-		this->_array = NULL;
-		this->_size = 0;
-		this->_capacity = 0;
-		this->_alloc = allocator_type();
-		*this = x;
+            *this = x;
         }
 
 
-        vector& operator=(const vector& x)
+        //destructor
+        ~vector()
         {
-            if (*this != x)
+            if (this->_array)
             {
-                // this->alloc = x.alloc;
-                for (size_type i = 0; i < this->_size; i++)
-                    _alloc.destroy(this->_array + i);
-                if (this->_capacity > 0)
-                    _alloc.deallocate(_array, this->_capacity);
-                if (this->capacity() < x.capacity())
-                        this->_capacity = x._capacity;
-            
-                this->_size = x._size;
-                this->_array = _alloc.allocate(this->_capacity);
-                for(size_type i = 0; i < x._size; i++)
-                    _alloc.construct(this->_array + i, x._array[i]);
+                clear();
+                this->_alloc.deallocate(this->_array, this->_capacity);
             }
-            return *this;
         }
 
 
 
+
+        //assignement operator
+        vector& operator= (const vector& x)
+        {
+            if (this->_capacity > 0)
+            {
+                for (size_type i = 0; i < this->_size; i++)
+                {
+                    this->_alloc.destroy(this->_array[i]);
+                }
+                this->_alloc.deallocate(this->_array, this->_capacity);
+                if (this->_capacity < x.capacity())
+                    this->_capacity = x.capacity();
+
+
+                this->_array = this->_alloc.allocate(this->_capacity);
+                this->_size = x.size();
+                for (size_type i = 0; i < this->_size; i++)
+                {
+                    this->_alloc.construct(this->_array + i, x._array + i);
+                }
+                return (*this);
+            }
+            this->_array = NULL;
+            this->_size = 0;
+            this->_capacity = 0;
+            this->_alloc = allocator_type();
+            return ();
+        }
+
+
+
+        //Iterators:
         iterator begin()
         {
             return (iterator(this->_array));
+        }
+
+        const_iterator begin() const
+        {
+            return (const_iterator(this->_array));
         }
 
         iterator end()
@@ -135,107 +135,191 @@ namespace ft{
             return (iterator(this->_array + this->_size));
         }
 
-            // iterator rbegin()
-            // {
-            //     return (&ptr[this->s - 1]);
-            // }
+        const_iterator end() const
+        {
+            return (const_iterator(this->_array + this->_size));
+        }
 
-            // iterator rend()
-            // {
-            //     return (&ptr[-1]);
-            // }
 
-        size_t size()
+        // Capacity:
+        size_type size() const
         {
             return (this->_size);
         }
 
-        size_t max_size()
+        size_type max_size() const
         {
             return (_alloc.max_size());
         }
 
-        // void resize(size_t sz)
-        // {
-        //     alocator a;
-        //     T *p;
+        void resize (size_type n, value_type val = value_type())
+        {
+            
+        }
 
-        //     p = a.allocate(sz);
-        //     for (size_t i = 0; i < sz; i++)
-        //     {
-        //         p[i] = (i < this->s) ? ptr[i] : 0;
-        //     }
-        //     a.deallocate(ptr, this->s);
-        //     ptr = p;
-        //     this->s = sz;
-        // }
+        size_type capacity() const
+        {
+            return (this->_capacity);
+        }
 
-        bool empty()
+        bool empty() const
         {
             return (this->_size == 0);
         }
 
-        // void resize(size_t sz, T x)
-        // {
-        //     alocator a;
-        //     T *p;
+        void reserve (size_type n)
+        {
 
-        //     p = a.allocate(sz);
-        //     for (size_t i = 0; i < sz; i++)
-        //     {
-        //         p[i] = (i < this->s) ? ptr[i] : x;
-        //     }
-        //     a.deallocate(ptr, this->s);
-        //     ptr = p;
-        //     this->s = sz;
-        // }
+        }
 
 
 
-        /************************ element acces ****************************/
+        //element acces
+        reference operator[] (size_type n)
+        {
+            return (this->_array[n]);
+        }
+
+        const_reference operator[] (size_type n) const
+        {
+            return (this->_array[n]);
+        }
+
+        reference at (size_type n)
+        {
+            return (this->_array[n]);
+        }
+
+        const_reference at (size_type n) const
+        {
+            return (this->_array[n]);
+        }
+
+        reference front()
+        {
+            return (*this->_array);
+        }
+
+        const_reference front() const
+        {
+            return (*this->_array);
+        }
+
+        reference back()
+        {
+            return (this->_array[this->_size - 1]);
+        }
+
+        const_reference back() const
+        {
+            return (this->_array[this->_size - 1]);
+        }
 
 
-        // T& operator[](T indx)
-        // {
-        //     return (this->ptr[indx]);
-        // }
 
-        // T& at(size_t n)
-        // {
-        //     return (this->ptr[n]);
-        // }
+        //modifiers
 
-        // T& front()
-        // {
-        //     return (*this->ptr);
-        // }
+        template <class InputIterator>
+        void assign (InputIterator first, InputIterator last)
+        {
 
-        // T& back()
-        // {
-        //     return (this->ptr[this->s - 1]);
-        // }
+        }
 
-        // T* data()
-        // {
-        //     return (this->ptr);
-        // }
+        void assign (size_type n, const value_type& val)
+        {
 
+        }
+
+        void push_back (const value_type& val)
+        {
+
+        }
+
+        void pop_back()
+        {
+
+        }
 
 
-        /************************ end element acces ****************************/
+        iterator insert (iterator position, const value_type& val)
+        {
 
-        /************************ modifiers ****************************/
-        /// Not yet tested clear()
+        }
 
-        // void clear()
-        // {
-        //     alocator a;
-        //     a.deallocate(ptr, this->s);
-        // }
+        void insert (iterator position, size_type n, const value_type& val)
+        {
+
+        }
+
+        template <class InputIterator>
+        void insert (iterator position, InputIterator first, InputIterator last)
+        {
+
+        }
+
+        iterator erase (iterator position)
+        {
+
+        }
+        iterator erase (iterator first, iterator last)
+        {
+            
+        }
+
+
+        void swap (vector& x)
+        {
+
+        }
+
+        void clear()
+        {
+
+        }
 
 
 
-        /************************ end modifiers ****************************/
     };
+
+    template <class T, class Alloc>
+    void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
+    {
+        
+    }
+
+
+    template <class T, class Alloc>
+    bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+
+    }
+    template <class T, class Alloc>
+    bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+
+    }
+    template <class T, class Alloc>
+    bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+
+    }
+    template <class T, class Alloc>
+    bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+
+    }
+    template <class T, class Alloc>
+    bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+
+    }
+    template <class T, class Alloc>
+    bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+    {
+
+    }
+
+
+
 
 }

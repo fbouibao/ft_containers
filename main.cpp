@@ -1,12 +1,22 @@
-#include "vector.hpp"
+// #include "vector.hpp"
 #include <vector>
 #include <memory>
 #include <math.h>
+#include <iostream>
 
 int main ()
 {
-  std::vector<int> myvector;
-  std::vector<int>::reverse_iterator it;
+  std::vector<int> myvector(6,6);
+  std::vector<int> myvector2(9,9);
+  std::cout << myvector2.size() << std::endl;
+
+  myvector2 = myvector;
+
+  std::cout << myvector2.size() << std::endl;
+
+return (0);
+
+  // std::vector<int>::reverse_iterator it;
   myvector.push_back (100);
   myvector.push_back (200);
   myvector.push_back (300);
