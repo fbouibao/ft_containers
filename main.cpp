@@ -7,12 +7,15 @@
 int main ()
 {
   std::vector<int> myvector(6,6);
-  std::vector<int> myvector2(9,9);
-  std::cout << myvector2.size() << std::endl;
 
-  myvector2 = myvector;
+  myvector.clear();
+  std::cout << myvector.size() << std::endl;
+  std::cout << myvector.capacity() << std::endl;
+  std::cout << myvector[2] << std::endl;
 
-  std::cout << myvector2.size() << std::endl;
+  // myvector = myvector;
+
+  // std::cout << myvector.capacity() << std::endl;
 
 return (0);
 

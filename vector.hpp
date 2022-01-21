@@ -95,7 +95,7 @@ namespace ft{
             {
                 for (size_type i = 0; i < this->_size; i++)
                 {
-                    this->_alloc.destroy(this->_array[i]);
+                    this->_alloc.destroy(this->_array + i);
                 }
                 this->_alloc.deallocate(this->_array, this->_capacity);
                 if (this->_capacity < x.capacity())
@@ -154,7 +154,28 @@ namespace ft{
 
         void resize (size_type n, value_type val = value_type())
         {
-            
+            if (n < this->_size)
+            {
+                for (size_type i = n; i < this->_size; i++)
+                    this->_alloc.destroy(this->_array + i);
+                this->_size = n;
+            }
+            else if (n > this->_capacity)
+            {
+                if (n > this->_capacity && n < this->_capacity * 2)
+                    reserve(n * 2);
+                else if (n > this->_capacity)
+                    reserve(n);
+                for (size_type i = this->_size; i < n; i++)
+                    this->_alloc.construct(this->_array + i, val);
+                this->_size = n;
+            }
+            else if (n > this->_size)
+            {
+                for (size_type i = this->_size; i < n; i++)
+                    this->_alloc.construct(this->_array + i, val);
+                this->_size = n;
+            }
         }
 
         size_type capacity() const
@@ -169,7 +190,24 @@ namespace ft{
 
         void reserve (size_type n)
         {
-
+            if (n > this->_capacity)
+            {
+                if (n > max_size())
+                    throw std::length_error("exceeds maximum supported size");
+                pointer tmp;
+                tmp = this->_alloc.allocate(n);
+                for (sizr_type i = 0; i < this->_size; i++)
+                {
+                    tmp[i] = this->_array[i];
+                }
+                for (size_type i = 0; i < this->_size; i++)
+                {
+                    this->_alloc.destroy(this->_array + i);
+                }
+                this->_alloc.dealocate(this->_array, this->_capacity);
+                this->_array = tmp;
+                this->_capacity = n;
+            }
         }
 
 
@@ -177,21 +215,29 @@ namespace ft{
         //element acces
         reference operator[] (size_type n)
         {
+            if (n >= this->_size)
+                throw std::out_of_range("outside of array");
             return (this->_array[n]);
         }
 
         const_reference operator[] (size_type n) const
         {
+            if (n >= this->_size)
+                throw std::out_of_range("outside of array");
             return (this->_array[n]);
         }
 
         reference at (size_type n)
         {
+            if (n >= this->_size)
+                throw std::out_of_range("outside of array");
             return (this->_array[n]);
         }
 
         const_reference at (size_type n) const
         {
+            if (n >= this->_size)
+                throw std::out_of_range("outside of array");
             return (this->_array[n]);
         }
 
@@ -222,12 +268,25 @@ namespace ft{
         template <class InputIterator>
         void assign (InputIterator first, InputIterator last)
         {
-
+            size_type n = (size_type)std::distance(first, last);
+            if (n > this->_capacity)
+                reserve(n);
+            for (size_type i = 0; i < this->_size; i++)
+                this->_alloc.destroy(this->_array + i);
+            for (size_type i = 0; i < n; i++)
+                this->_alloc.construct(this->_array + i, *(first + 1));
+            this->_size = n;
         }
 
         void assign (size_type n, const value_type& val)
         {
-
+            if (n > this->_capacity)
+                reserve(n);
+            for (size_type i = 0; i < this->_size; i++)
+                this->_alloc.destroy(this->_array + i);
+            for (size_type i = 0; i < n; i++)
+                this->_alloc.construct(this->_array + i, val);
+            this->_size = n;
         }
 
         void push_back (const value_type& val)
@@ -269,12 +328,28 @@ namespace ft{
 
         void swap (vector& x)
         {
+            pointer tmp;
+            size_type ts;
+            size_type tc;
 
+            tmp = this->_array;
+            this->_array = x._array;
+            x._array = tmp;
+            
+            ts = this->_size;
+            this->_size = x._size;
+            x._size = ts;
+
+            tc = this->_capacity;
+            this->_capacity = x._capacity;
+            x._capacity = tc;
         }
 
         void clear()
         {
-
+            for (size_type i = 0; i < this->_size; i++)
+                this->_alloc.destroy(this->_array + i);
+            this->_size = 0;            
         }
 
 
