@@ -6,12 +6,25 @@
 
 int main ()
 {
-  std::vector<int> myvector(6,6);
+  std::vector<int> myvector;
 
-  myvector.clear();
-  std::cout << myvector.size() << std::endl;
-  std::cout << myvector.capacity() << std::endl;
-  std::cout << myvector[2] << std::endl;
+  myvector.push_back(0);
+  myvector.push_back(1);
+  myvector.push_back(2);
+  myvector.push_back(3);
+  myvector.push_back(4);
+  myvector.push_back(5);
+  myvector.push_back(6);
+  std::vector<int>::iterator it = myvector.begin() + 3;
+
+
+  std::cout << *(it) << std::endl;
+  
+  std::cout << std::distance(myvector.begin(), it) << std::endl;
+  // myvector.clear();
+  // std::cout << myvector.size() << std::endl;
+  // std::cout << myvector.capacity() << std::endl;
+  // std::cout << myvector[2] << std::endl;
 
   // myvector = myvector;
 

@@ -291,38 +291,125 @@ namespace ft{
 
         void push_back (const value_type& val)
         {
-
+            if (this->_capacity == 0)
+                reserve(++(this->_capacity));
+            else if (this->_size == this->_capacity)
+            {
+                this->_capacity = this->_size * 2;
+                reserve(this->_capacity);
+            }
+            this->_alloc.construct(this->_array + this->_size, val);
+            this->_size++;
         }
 
         void pop_back()
         {
-
+            if (this->_size > 0)
+            {
+                this->_size--;
+                this->_alloc.destroy(this->_array + this->_size);
+            }
         }
 
 
         iterator insert (iterator position, const value_type& val)
         {
-
+            size_type d = (size_type)std::distance(begin(), position);
+            if (this->_capacity == 0)
+                reserve(++(this->_capacity));
+            else if (this->_size == this->_capacity)
+            {
+                this->_capacity = this->_size * 2;
+                reserve(this->_capacity);
+            }
+            for (size_type i = this->_size; i > d; i--)
+            {
+                this->_alloc.construct(this->_array + i, this->_array[i - 1]);
+            }
+            this->_alloc.construct(this->_array + d, val);
+            this->_size++;
+            return (this->_array + d);
         }
 
         void insert (iterator position, size_type n, const value_type& val)
         {
+            size_type d = (size_type)std::distance(begin(), position);
+            if (this->_capacity == 0 || (this->_size + n) > (this->_capacity * 2))
+            {
+                this->_capacity = this->_size + n;
+                reserve(this->_capacity);
+            }
+            else if ((this->_size + n) > this->_capacity)
+            {
+                this->_capacity = this->_size * 2;
+                reserve(this->_capacity);
+            }
 
+            for (size_type i = this->_size + n - 1; i > d; i--)
+            {
+                this->_alloc.construct(this->_array + i, this->_array[i - 1]);
+            }
+            for (size_type i = d; i < this->_size + n; i++)
+            {
+                this->_alloc.construct(this->_array + i, val);                
+            }
+            this->_size += n;
         }
 
         template <class InputIterator>
         void insert (iterator position, InputIterator first, InputIterator last)
         {
+            size_type d = (size_type)std::distance(begin(), position);
+            size_type n = (size_type)std::distance(first, last);
 
+            if (this->_capacity == 0 || (this->_size + n) > (this->_capacity * 2))
+            {
+                this->_capacity = this->_size + n;
+                reserve(this->_capacity);
+            }
+            else if ((this->_size + n) > this->_capacity)
+            {
+                this->_capacity = this->_size * 2;
+                reserve(this->_capacity);
+            }
+
+            for (size_type i = this->_size + n - 1; i > d; i--)
+            {
+                this->_alloc.construct(this->_array + i, this->_array[i - 1]);
+            }
+            for (size_type i = d; i < this->_size + n; i++)
+            {
+                this->_alloc.construct(this->_array + i, *(first++));                
+            }
+            this->_size += n;
         }
 
         iterator erase (iterator position)
         {
-
+            size_type d = (size_type)std::distance(begin(), position);
+            this->_alloc.destroy(this->_array + d);
+            for (size_type i = d; i < this->_size; i++)
+            {
+                this->_alloc.construct(this->_array + i, this->_array[i + 1]);                
+            }
+            this->_size--;
+            return (this->_array + d);
         }
         iterator erase (iterator first, iterator last)
         {
-            
+            size_type d = (size_type)std::distance(begin(), position);
+            size_type n = (size_type)std::distance(first, last);
+            for (size_type i = d; i < d + n; i++)
+            {
+                this->_alloc.destroy(this->_array + i);
+            }
+            for (size_type i = d; i < this->_size; i++)
+            {
+                this->_alloc.construct(this->_array + i, this->_array[i + n]);                
+            }
+            this->_size -= n;
+            return (this->_array + d);
+
         }
 
 
@@ -359,7 +446,7 @@ namespace ft{
     template <class T, class Alloc>
     void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
     {
-        
+        x.swap(y);
     }
 
 
