@@ -1,4 +1,4 @@
-// #include "vector.hpp"
+#include "vector.hpp"
 #include <vector>
 #include <memory>
 #include <math.h>
@@ -6,21 +6,34 @@
 
 int main ()
 {
-  std::vector<int> myvector;
+        std::string str, ft_str;
+        /*
+         * var to store the size and the capacity
+         */
+        ft::vector<std::string>::size_type s, ft_s;
+        ft::vector<std::string>::size_type c, ft_c;
+        /*
+         * bool to store the comparison
+         */
+        bool cond;
+std::vector<std::string> v1(300, "string");
+            std::vector<std::string> v;
+            ft::vector<std::string> ft_v;
+            v.insert(v.begin(), v1.begin(), v1.end());
+            // ft_v.insert(ft_v.begin(), v1.begin(), v1.end());
+            // ft_v.begin()->length();
 
-  myvector.push_back(0);
-  myvector.push_back(1);
-  myvector.push_back(2);
-  myvector.push_back(3);
-  myvector.push_back(4);
-  myvector.push_back(5);
-  myvector.push_back(6);
-  std::vector<int>::iterator it = myvector.begin() + 3;
+            // s = v.size();
+            // ft_s = ft_v.size();
+            // c = v.capacity();
+            // ft_c = ft_v.capacity();
+            // for (size_t i = 0; i < v.size(); ++i)
+            //     str += v[i];
+            // for (size_t i = 0; i < ft_v.size(); ++i)
+            //     ft_str += ft_v[i];
+            //cond = ((str == ft_str) && (s == ft_s) && (c == ft_c));
 
 
-  std::cout << *(it) << std::endl;
-  
-  std::cout << std::distance(myvector.begin(), it) << std::endl;
   // myvector.clear();
   // std::cout << myvector.size() << std::endl;
   // std::cout << myvector.capacity() << std::endl;
@@ -33,25 +46,25 @@ int main ()
 return (0);
 
   // std::vector<int>::reverse_iterator it;
-  myvector.push_back (100);
-  myvector.push_back (200);
-  myvector.push_back (300);
+  // myvector.push_back (100);
+  // myvector.push_back (200);
+  // myvector.push_back (300);
 
-  std::cout << "myvector contains:";
-  for (unsigned i=0; i<myvector.size(); i++)
-    std::cout << ' ' << myvector[i];
-  std::cout << '\n';
+  // std::cout << "myvector contains:";
+  // for (unsigned i=0; i<myvector.size(); i++)
+  //   std::cout << ' ' << myvector[i];
+  // std::cout << '\n';
 
-  myvector.clear();
-  myvector.push_back (1101);
-  myvector.push_back (2202);
+  // myvector.clear();
+  // myvector.push_back (1101);
+  // myvector.push_back (2202);
 
-  std::cout << "myvector contains:";
-  for (unsigned i=0; i<myvector.size(); i++)
-    std::cout << ' ' << myvector[i];
-  std::cout << '\n';
+  // std::cout << "myvector contains:";
+  // for (unsigned i=0; i<myvector.size(); i++)
+  //   std::cout << ' ' << myvector[i];
+  // std::cout << '\n';
 
-  return 0;
+  // return 0;
 }
 
 
