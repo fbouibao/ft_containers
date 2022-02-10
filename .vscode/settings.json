@@ -69,6 +69,8 @@
         "numeric": "cpp",
         "random": "cpp",
         "iomanip": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "__tree": "cpp",
+        "map": "cpp"
     }
 }

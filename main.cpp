@@ -2,10 +2,12 @@
 #include <vector>
 #include <memory>
 #include <math.h>
+#include <map>
 #include <iostream>
 
 int main ()
 {
+        std::map<int,int> m;
         std::string str, ft_str;
         /*
          * var to store the size and the capacity
