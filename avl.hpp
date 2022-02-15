@@ -4,6 +4,7 @@
 #include "reverse_iterator.hpp"
 #include "enable_type.hpp"
 #include "algorithms.hpp"
+#include <cmath>
 
 namespace ft{
     template < class value_type,
@@ -77,10 +78,63 @@ namespace ft{
             return (node_height(node->left) - node_height(node->right));
         }
 
+			/*
+                      A                                      B 
+                     / \                                   /   \
+                    B   1                                 x     A
+                   / \          - - - - - - - - ->      /  \   /  \ 
+                  C   2                                4    3 2    1
+                 / \
+                4   3
+			*/
+
+
+        Node *rotate_right(Node *node)
+        {
+            Node *b = node->left;
+            Node *n2 = b->right;
+
+            b->right = node;
+            node->left = n2;
+            b->parent = node->parent;
+            node->parent = b;
+            if (n2)
+                n2->parent = node;
+            node->height = this->max(this->node_height(node->left), this->node_height(node->right)) + 1;
+            b->height = this->max(this->node_height(b->left), this->node_height(b->right)) + 1;
+            return (b);
+        }
+
+		/*
+          A                                B
+         /  \                            /   \ 
+        1    B                          A      C
+            /  \   - - - - - - - ->    / \    / \
+           2    C                     1   2  3   4
+               / \
+              3   4
+		*/
+
+        Node *rotate_left(Node *node)
+        {
+            Node *b = node->right;
+            Node *n2 = b->left;
+
+            b->right = node;
+            node->left = n2;
+            b->parent = node->parent;
+            node->parent = b;
+            if (n2)
+                n2->parent = node;
+            node->height = this->max(this->node_height(node->left), this->node_height(node->right)) + 1;
+            b->height = this->max(this->node_height(b->left), this->node_height(b->right)) + 1;
+            return (b);
+        }
+
 
         Node *insert_node(Node *node, key k, T value, Node *parent = NULL)
         {
-            Node *node;
+            Node *tmp;
 
             if (node == NULL)
             {
@@ -102,11 +156,15 @@ namespace ft{
             }
             node->height = 1 + max(node_height(node->left), node_height(node->right));
             int balance = balanced(node);
-            if (balance > 1)
+            if (std::abs(balance) > 1 && this->_ob_c(k, node->left->value->first))
             {
-
+                retate_right(node);
             }
 
+            if (std::abs(balance) > 1 && this->_ob_c(node->left->value->first, k))
+            {
+                retate_left(node);
+            }
 
         }
     };
