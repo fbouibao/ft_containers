@@ -158,14 +158,26 @@ namespace ft{
             int balance = balanced(node);
             if (std::abs(balance) > 1 && this->_ob_c(k, node->left->value->first))
             {
-                retate_right(node);
+                rotate_right(node);
+            }
+
+            if (std::abs(balance) > 1 && this->_ob_c(node->right->value->first, k))
+            {
+                rotate_left(node);
             }
 
             if (std::abs(balance) > 1 && this->_ob_c(node->left->value->first, k))
             {
-                retate_left(node);
+                node->left = rotate_left(node->left);
+                node = rotate_right(node);
             }
 
+            if (std::abs(balance) > 1 && this->_ob_c(k, node->right->value->first))
+            {
+                node->right = rotate_right(node->right);
+                node = rotate_left(node);
+            }
+            return (tmp);
         }
     };
     
