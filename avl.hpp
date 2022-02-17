@@ -142,11 +142,11 @@ namespace ft{
                 tmp = node;
                 return (tmp);
             }
-            if (key_compare(k, node->value->first))
+            if (this->_ob_c(k, node->value->first))
             {
                 tmp = insert_node(node->left, k, value, node);
             }
-            else if (key_compare(node->value->first, k))
+            else if (this->_ob_c(node->value->first, k))
             {
                 tmp = insert_node(node->right, k, value, node);
             }
@@ -178,6 +178,48 @@ namespace ft{
                 node = rotate_left(node);
             }
             return (tmp);
+        }
+
+        void delete_node(Node *node, key k)
+        {
+            if (node == NULL)
+            {
+                return ;
+            }
+            if (this->_ob_c(node->value->first, k))
+            {
+                delete_node(node->right, k);
+            }
+            else if (this->_ob_c(k, node->value->first))
+            {
+                delete_node(node->left, k);
+            }
+            else
+            {
+                // node->value->first == key
+                if (node->left == NULL || node->right == NULL)
+                {
+                    Node *tmp = node->left ? node->left : node->right;
+                    if (tmp == NULL)
+                    {
+                        tmp = node;
+                        node = NULL;
+                    }
+                    else
+                    {
+                        std::swap(node->value, tmp->value);
+                        node->left = tmp->left;
+                        node->right = tmp->right;
+                        node->height = tmp->height;
+                    }
+                    this->_alloc_pair.dealocate(tmp->value, 1);
+                    this->_alloc_node.dealocate(tmp, 1);
+                }
+                else
+                {
+                    
+                }
+            }
         }
     };
     
