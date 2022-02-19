@@ -24,7 +24,6 @@ namespace ft{
         typedef ft::reverse_iterator<iterator>						    reverse_iterator;
         typedef ft::reverse_iterator    <const_iterator>				const_reverse_iterator;
         typedef std::ptrdiff_t                                          difference_type;
-
     private:
         pointer         _array;
         size_type       _size;
@@ -372,6 +371,7 @@ namespace ft{
             this->_size--;
             return (iterator(this->_array + d));
         }
+
         iterator erase (iterator first, iterator last)
         {
             size_type d = (size_type)std::distance(begin(), first);

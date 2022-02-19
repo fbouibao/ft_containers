@@ -180,6 +180,30 @@ namespace ft{
             return (tmp);
         }
 
+        Node *min_node(Node *node)
+        {
+            Node *tmp;
+
+            tmp = node;
+            while (tmp->left)
+            {
+                tmp = tmp->left;
+            }
+            return (tmp);
+        }
+
+        Node *max_node(Node *node)
+        {
+            Node *tmp;
+
+            tmp = node;
+            while (tmp->right)
+            {
+                tmp = tmp->right;
+            }
+            return (tmp);
+        }
+
         void delete_node(Node *node, key k)
         {
             if (node == NULL)
@@ -217,8 +241,33 @@ namespace ft{
                 }
                 else
                 {
-                    
+                    Node *min = min_node(node->right);
+                    std::swap(min->value, node->value);
+                    this->delete_node(node->right, node->value->first);
                 }
+            }
+            node->height = 1 + max(node_height(node->left), node_height(node->right));
+            int balance = balanced(node);
+            if (std::abs(balance) > 1 && this->_ob_c(k, node->left->value->first))
+            {
+                rotate_right(node);
+            }
+
+            if (std::abs(balance) > 1 && this->_ob_c(node->right->value->first, k))
+            {
+                rotate_left(node);
+            }
+
+            if (std::abs(balance) > 1 && this->_ob_c(node->left->value->first, k))
+            {
+                node->left = rotate_left(node->left);
+                node = rotate_right(node);
+            }
+
+            if (std::abs(balance) > 1 && this->_ob_c(k, node->right->value->first))
+            {
+                node->right = rotate_right(node->right);
+                node = rotate_left(node);
             }
         }
     };
