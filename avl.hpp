@@ -81,7 +81,7 @@ namespace ft{
 			/*
                       A                                      B 
                      / \                                   /   \
-                    B   1                                 x     A
+                    B   1                                 C     A
                    / \          - - - - - - - - ->      /  \   /  \ 
                   C   2                                4    3 2    1
                  / \
@@ -246,6 +246,8 @@ namespace ft{
                     this->delete_node(node->right, node->value->first);
                 }
             }
+            if (node == NULL)
+                return ;
             node->height = 1 + max(node_height(node->left), node_height(node->right));
             int balance = balanced(node);
             if (std::abs(balance) > 1 && this->_ob_c(k, node->left->value->first))

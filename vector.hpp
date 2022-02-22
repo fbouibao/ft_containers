@@ -6,7 +6,6 @@
 #include "enable_type.hpp"
 #include "algorithms.hpp"
 
-
 namespace ft{
     template <class T, class _aloc = std::allocator<T> >
     class vector
