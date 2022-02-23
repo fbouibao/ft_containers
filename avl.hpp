@@ -250,27 +250,66 @@ namespace ft{
                 return ;
             node->height = 1 + max(node_height(node->left), node_height(node->right));
             int balance = balanced(node);
-            if (std::abs(balance) > 1 && this->_ob_c(k, node->left->value->first))
+            if (std::abs(balance) > 1 && balanced(node->left) >= 0)
             {
                 rotate_right(node);
             }
 
-            if (std::abs(balance) > 1 && this->_ob_c(node->right->value->first, k))
+            if (std::abs(balance) > 1 && balanced(node->right) <= 0)
             {
                 rotate_left(node);
             }
 
-            if (std::abs(balance) > 1 && this->_ob_c(node->left->value->first, k))
+            if (std::abs(balance) > 1 && balanced(node->left) < 0)
             {
                 node->left = rotate_left(node->left);
                 node = rotate_right(node);
             }
 
-            if (std::abs(balance) > 1 && this->_ob_c(k, node->right->value->first))
+            if (std::abs(balance) > 1 && balanced(node->right) > 0)
             {
                 node->right = rotate_right(node->right);
                 node = rotate_left(node);
             }
+        }
+
+        Node *search(Node *node, key k)
+        {
+            Node *tmp;
+
+            if (node == NULL)
+                return (NULL);
+            tmp = node;
+            if (this->_ob_c(node->value->first, k))
+            {
+                tmp = search(node->right, k);
+            }
+            else if (this->_ob_c(k, node->value->first))
+            {
+                tmp = search(node->left, k);
+            }
+            return (tmp);
+        }
+
+        void    remove_tre(Node *node)
+        {
+            if (node == NULL)
+                return ;
+            remove_tre(node->left);
+            remove_tre(node->right);
+            this->_alloc_pair.dealocate(node->value, 1);
+            this->_alloc_node.dealocate(node, 1);
+            node = NULL;
+        }
+    
+        bool    empty(Node *node)
+        {
+            return (node == NULL);
+        }
+
+        size_type   max_type() const
+        {
+            return (this->_alloc_node.max_size());
         }
     };
     
