@@ -7,7 +7,7 @@
 
 int main ()
 {
-        std::map<int,int> m;
+        std::map<int,int> m;        
         m.insert(std::pair<int, int>(8,6));
         m.insert(std::pair<int, int>(3,2));
         m.insert(std::pair<int, int>(0,4));

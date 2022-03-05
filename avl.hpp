@@ -311,6 +311,11 @@ namespace ft{
         {
             return (this->_alloc_node.max_size());
         }
+
+        Node *getsuccesor(const Node *node)
+        {
+
+        }
     };
     
  
