@@ -314,7 +314,20 @@ namespace ft{
 
         Node *getsuccesor(const Node *node)
         {
+            if (node == NULL)
+                return (NULL);
+            if (node->right)
+                return (min_node(node->right));
+            return (NULL);
+        }
 
+        Node *getpresuccesor(const Node *node)
+        {
+            if (node == NULL)
+                return (NULL);
+            if (node->left)
+                return (min_node(node->left));
+            return (NULL);
         }
     };
     

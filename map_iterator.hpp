@@ -1,4 +1,5 @@
 #include "base_iterator.hpp"
+#include "avl.hpp"
 
 namespace ft{
     template <class value_type_pair, class Node, class Tree>
@@ -46,10 +47,62 @@ namespace ft{
 
         map_iterator & operator ++ ()
         {
-            
+            this->_node = this->_tree->getsuccesor(this->_node);
+            return (*this);
         }
+
+        map_iterator   operator ++ (int)
+        {
+            Node *tmp = this->_node;
+            this->_node = ç;
+            return (map_iterator(this->_tree, tmp));
+        }
+
+        map_iterator & operator -- ()
+        {
+            this->_node = this->_tree->getpresuccesor(this->_node);
+            return (*this);
+        }
+
+        map_iterator   operator -- (int)
+        {
+            Node *tmp = this->_node;
+            this->_node = this->_tree->getpresuccesor(this->_node);
+            return (map_iterator(this->_tree, tmp));
+        }    
+
+        map_iterator    operator + (difference_type a)
+        {
+            Node *tmp = this->_tree->getsuccesor(this->_node);
+            while (--a)
+            {
+                tmp = this->_tree->getsuccesor(this->_node);
+            }
+            return (map_iterator(this->_tree, tmp));
+        }
+
+        reference operator * ()
+        {
+            return (*(this->_node->value));
+        }
+
+        reference operator -> ()
+        {
+            return (this->_node->value);
+        }
+
+        template <class it, class it2>
+        friend bool operator== (const it &i, const it2 &i2);
+
+        template <class it, class it2>
+        friend bool operator!= (const it &i, const it2 &i2);
 
     };
     
-    
+    template <class it, class it2>
+    bool operator== (const it &i, const it2 &i2)
+    {
+        if (i.base() == NULL )
+    }
+
 }
