@@ -1,15 +1,17 @@
+#pragma once
+
 #include "base_iterator.hpp"
-#include "avl.hpp"
+// #include "avl.hpp"
 
 namespace ft{
     template <class value_type_pair, class Node, class Tree>
     class map_iterator : public base_iterator<std::bidirectional_iterator_tag, value_type_pair>
     {
-        typedef base_iterator<std::bidirectional_iterator_tag, value_type_pair>::difference_type difference_type;
-        typedef base_iterator<std::bidirectional_iterator_tag, value_type_pair>::value_type value_type;
-        typedef base_iterator<std::bidirectional_iterator_tag, value_type_pair>::pointer pointer;
-        typedef base_iterator<std::bidirectional_iterator_tag, value_type_pair>::reference reference;
-        typedef base_iterator<std::bidirectional_iterator_tag, value_type_pair>::iterator_category iterator_category;
+        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::difference_type difference_type;
+        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::value_type value_type;
+        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::pointer pointer;
+        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::reference reference;
+        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::iterator_category iterator_category;
 
     private:
         Tree _tree;
@@ -54,7 +56,7 @@ namespace ft{
         map_iterator   operator ++ (int)
         {
             Node *tmp = this->_node;
-            this->_node = ç;
+            this->_node = this->_tree->getsuccesor(this->_node);
             return (map_iterator(this->_tree, tmp));
         }
 
@@ -102,7 +104,13 @@ namespace ft{
     template <class it, class it2>
     bool operator== (const it &i, const it2 &i2)
     {
-        if (i.base() == NULL )
+        return (i.base() == i2.base());
+    }
+
+    template <class it, class it2>
+    bool operator!= (const it &i, const it2 &i2)
+    {
+        return (!(i == i2));
     }
 
 }

@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main ()
-{
+{       std::vector<int> a;
         std::map<int,int> m;        
         m.insert(std::pair<int, int>(10,6));
         m.insert(std::pair<int, int>(8,2));

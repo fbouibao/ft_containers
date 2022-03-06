@@ -1,3 +1,5 @@
+#pragma once
+
 namespace ft{
     template<class T1, class T2>
     class pair
@@ -11,12 +13,12 @@ namespace ft{
 
         pair() : first(), second() {}
         template<class U, class V>
-        pair(const pair<U1, U2>& p) : first(p.first), second(p.second) {}
-        pair(const& T1 a, const& T2 b) : first(a), second(b) {}
-        pair& operator= (const pair& pr);
+        pair(const pair<U, V>& p) : first(p.first), second(p.second) {}
+        pair(const T1& a, const T2& b) : first(a), second(b) {}
+        pair& operator= (const pair& pr)
         {
-            first = p.first;
-            second = p.second;
+            first = pr.first;
+            second = pr.second;
             return *this;
         }
         ~pair() {}
@@ -46,7 +48,7 @@ namespace ft{
     { return !(lhs<rhs); }
 
     template <class T1,class T2>
-    pair<T1,T2> make_pair (T1 x, T2 y)
+    pair<T1,T2> make_pair(T1 x, T2 y)
     {
         return (pair<T1,T2>(x,y) );
     }
