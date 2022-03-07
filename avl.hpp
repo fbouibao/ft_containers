@@ -95,7 +95,7 @@ namespace ft{
         {
             Node *b = node->left;
             Node *n2 = b->right;
-
+ 
             b->right = node;
             node->left = n2;
             b->parent = node->parent;

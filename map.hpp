@@ -50,6 +50,9 @@ namespace ft
 		private:
 			typedef		avl<value_type, Compare, Alloc> Tree;
 			typedef		typename avl<value_type, Compare, Alloc>::Node Node;
+			Tree				_tree;
+			allocator_type		_map_alloc;
+			key_compare			_key_map_compare;
 		public:
 			typedef		map_iterator<value_type, Node, Tree>				iterator;
 			typedef		map_iterator<const value_type, const Node, Tree>	const_iterator;
@@ -58,28 +61,41 @@ namespace ft
 
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
-
+			this->_tree._node = NULL;
+			this->_map_alloc = alloc;
+			this->_key_map_compare = comp;
+			this->_tree._ob_c = comp;
 		}
 	
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
-
+			this->_tree._node = NULL;
+			this->_map_alloc = alloc;
+			this->_key_map_compare = comp;
+			this->_tree._ob_c = comp;
 		}
 
 		map (const map& x)
 		{
-
+			*this = x;
 		}
 
 		~map()
 		{
-
+			this->clear();
 		}
 
 		map& operator= (const map& x)
 		{
-
+			this->_map_alloc = x._map_alloc;
+			this->_key_map_compare = x._key_map_compare;
+			this->_tree._ob_c = x._tree._ob_c;
+			this->_tree.remove_tre(this->_tree._node);
+			while ()
+			{
+				
+			}
 		}
 
 	    iterator begin()
