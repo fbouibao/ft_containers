@@ -51,6 +51,7 @@ namespace ft
 			typedef		avl<value_type, Compare, Alloc> Tree;
 			typedef		typename avl<value_type, Compare, Alloc>::Node Node;
 			Tree				_tree;
+			type_size			_size;
 			allocator_type		_map_alloc;
 			key_compare			_key_map_compare;
 		public:
@@ -92,40 +93,52 @@ namespace ft
 			this->_key_map_compare = x._key_map_compare;
 			this->_tree._ob_c = x._tree._ob_c;
 			this->_tree.remove_tre(this->_tree._node);
-			while ()
+			for (const_itarator it = x.begin(); it != x.end(); ++it)
 			{
-				
+				this->insert(*it);
 			}
+			this->_size = x._size;
+			return (*(this));
 		}
 
 	    iterator begin()
 		{
-
+			if (this->_tree._node == NULL)
+				return (iterator(_tree, NULL));
+			return (iterator(this->_tree, this->_tree.min_node(this->_tree._node)));
 		}
 
 		const_iterator begin() const
 		{
-
+			if (this->_tree._node == NULL)
+				return (const_iterator(_tree, NULL));
+			return (const_iterator(this->_tree, this->_tree.min_node(this->_tree._node)));
 		}
 
 		iterator end()
 		{
-		
+			if (this->_tree._node == NULL)
+				return (iterator(_tree, NULL));
+			return (iterator(this->_tree, this->_tree.max_node(this->_tree._node)));
 		}
 
 		const_iterator end() const
 		{
-
+			if (this->_tree._node == NULL)
+				return (const_iterator(_tree, NULL));
+			return (const_iterator(this->_tree, this->_tree.max_node(this->_tree._node)));
 		}
 
 	    reverse_iterator rbegin()
 		{
-
+			return (reverse_iterator(end());
 		}
 
 		const_reverse_iterator rbegin() const
 		{
-
+			if (this->_tree._node == NULL)
+				return (const_reverse_iterator(const_iterator(_tree, NULL)));
+			return (const_reverse_iterator(const_iterator(this->_tree, this->_tree.min_node(this->_tree._node))));
 		}
 
 	    reverse_iterator rend()

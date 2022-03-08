@@ -4,9 +4,19 @@
 #include <math.h>
 #include <map>
 #include <iostream>
+#include <stdlib.h>
 
 int main ()
-{       std::vector<int> a;
+{
+  // int *ssa;
+  // ssa = (int*)malloc(sizeof(int) * 555555555);
+  
+  // ssa[9999999] = 15;
+
+  // std::cout << ssa[9999999]<< std::endl;
+
+  // return (0);
+         std::vector<int> a;
         std::map<int,int> m;        
         m.insert(std::pair<int, int>(10,6));
         m.insert(std::pair<int, int>(8,2));

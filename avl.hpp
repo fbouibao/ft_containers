@@ -33,20 +33,29 @@ namespace ft{
         }               Node;
 
         Node *_node;
+        Node *_end_node;
         Compare _ob_c;
         typename Alloc::template rebind<Node>::other _alloc_node;
         Alloc   _alloc_pair;
 
-
-
         avl()
         {
-            
-
+            this->_node = NULL;
+            this->_end_node = _alloc_node.allocate(1);
         }
+
         ~avl()
         {
+            _alloc_node.deallocate(_end_node);
+        }
 
+        Node *get_head(Node *node)
+        {
+        	Node * nodeParent = node->parent;
+			while (nodeParent != NULL) {
+				nodeParent = nodeParent->parent;
+			}
+			return (nodeParent);
         }
 
         Node *new_node(value_type pair_val, Node *parent)
@@ -104,6 +113,7 @@ namespace ft{
                 n2->parent = node;
             node->height = this->max(this->node_height(node->left), this->node_height(node->right)) + 1;
             b->height = this->max(this->node_height(b->left), this->node_height(b->right)) + 1;
+            this->_node = get_head(node);
             return (b);
         }
 
@@ -130,6 +140,7 @@ namespace ft{
                 n2->parent = node;
             node->height = this->max(this->node_height(node->left), this->node_height(node->right)) + 1;
             b->height = this->max(this->node_height(b->left), this->node_height(b->right)) + 1;
+            this->_node = get_head(node);
             return (b);
         }
 
@@ -142,6 +153,7 @@ namespace ft{
             {
                 node = this->new_node(ft::make_pair<key, T>(k, value), parent);
                 tmp = node;
+                this->_node = get_head(node);
                 return (tmp);
             }
             if (this->_ob_c(k, node->value->first))
@@ -154,6 +166,7 @@ namespace ft{
             }
             else
             {
+                this->_node = get_head(node);
                 return (node);
             }
             node->height = 1 + max(node_height(node->left), node_height(node->right));
@@ -179,6 +192,7 @@ namespace ft{
                 node->right = rotate_right(node->right);
                 node = rotate_left(node);
             }
+            this->_node = get_head(node);
             return (tmp);
         }
 
@@ -273,6 +287,7 @@ namespace ft{
                 node->right = rotate_right(node->right);
                 node = rotate_left(node);
             }
+            this->_node = get_head(node);
         }
 
         Node *search(Node *node, key k)
