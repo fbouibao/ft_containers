@@ -50,8 +50,8 @@ namespace ft
 		private:
 			typedef		avl<value_type, Compare, Alloc> Tree;
 			typedef		typename avl<value_type, Compare, Alloc>::Node Node;
-			Tree				_tree;
-			type_size			_size;
+			Tree				*_tree;
+			size_type			_size;
 			allocator_type		_map_alloc;
 			key_compare			_key_map_compare;
 		public:
@@ -62,19 +62,19 @@ namespace ft
 
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
-			this->_tree._node = NULL;
+			this->_tree->_node = NULL;
 			this->_map_alloc = alloc;
 			this->_key_map_compare = comp;
-			this->_tree._ob_c = comp;
+			this->_tree->_ob_c = comp;
 		}
 	
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
-			this->_tree._node = NULL;
+			this->_tree->_node = NULL;
 			this->_map_alloc = alloc;
 			this->_key_map_compare = comp;
-			this->_tree._ob_c = comp;
+			this->_tree->_ob_c = comp;
 		}
 
 		map (const map& x)
@@ -91,9 +91,9 @@ namespace ft
 		{
 			this->_map_alloc = x._map_alloc;
 			this->_key_map_compare = x._key_map_compare;
-			this->_tree._ob_c = x._tree._ob_c;
-			this->_tree.remove_tre(this->_tree._node);
-			for (const_itarator it = x.begin(); it != x.end(); ++it)
+			this->_tree->_ob_c = x._tree->_ob_c;
+			this->_tree->remove_tre(this->_tree->_node);
+			for (const_iterator it = x.begin(); it != x.end(); ++it)
 			{
 				this->insert(*it);
 			}
@@ -103,72 +103,70 @@ namespace ft
 
 	    iterator begin()
 		{
-			if (this->_tree._node == NULL)
+			if (this->_tree->_node == NULL)
 				return (iterator(_tree, NULL));
-			return (iterator(this->_tree, this->_tree.min_node(this->_tree._node)));
+			return (iterator(this->_tree, this->_tree->min_node(this->_tree->_node)));
 		}
 
 		const_iterator begin() const
 		{
-			if (this->_tree._node == NULL)
+			if (this->_tree->_node == NULL)
 				return (const_iterator(_tree, NULL));
-			return (const_iterator(this->_tree, this->_tree.min_node(this->_tree._node)));
+			return (const_iterator(this->_tree, this->_tree->min_node(this->_tree->_node)));
 		}
 
 		iterator end()
 		{
-			if (this->_tree._node == NULL)
+			if (this->_tree->_node == NULL)
 				return (iterator(_tree, NULL));
-			return (iterator(this->_tree, this->_tree.max_node(this->_tree._node)));
+			return (iterator(this->_tree, this->_tree->_end_node));
 		}
 
 		const_iterator end() const
 		{
-			if (this->_tree._node == NULL)
+			if (this->_tree->_node == NULL)
 				return (const_iterator(_tree, NULL));
-			return (const_iterator(this->_tree, this->_tree.max_node(this->_tree._node)));
+			return (const_iterator(this->_tree, this->_tree->_end_node));
 		}
 
 	    reverse_iterator rbegin()
 		{
-			return (reverse_iterator(end());
+			return (reverse_iterator(end()));
 		}
 
 		const_reverse_iterator rbegin() const
 		{
-			if (this->_tree._node == NULL)
-				return (const_reverse_iterator(const_iterator(_tree, NULL)));
-			return (const_reverse_iterator(const_iterator(this->_tree, this->_tree.min_node(this->_tree._node))));
+			return (const_reverse_iterator(end()));
 		}
 
 	    reverse_iterator rend()
 		{
-
+			return (reverse_iterator(begin()));
 		}
 
 		const_reverse_iterator rend() const
 		{
-
+			return (const_reverse_iterator(begin()));
 		}
 
-		bool empty() const
+		bool empty () const
 		{
-
+			return (this->_size == 0);
 		}
 
 		size_type size() const
 		{
-
+			return (this->_size);
 		}
 
 		size_type max_size() const
 		{
-			
+			return (this->_tree->max_size());
 		}
 
 		mapped_type& operator[] (const key_type& k)
 		{
-
+			return (this->_tree->search(this->_tree->_node, k));
 		}
 
 		pair<iterator,bool> insert (const value_type& val)

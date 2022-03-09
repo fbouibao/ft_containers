@@ -3,6 +3,7 @@
 #include <memory>
 #include <math.h>
 #include <map>
+#include "map.hpp"
 #include <iostream>
 #include <stdlib.h>
 
@@ -16,18 +17,32 @@ int main ()
   // std::cout << ssa[9999999]<< std::endl;
 
   // return (0);
-         std::vector<int> a;
-        std::map<int,int> m;        
-        m.insert(std::pair<int, int>(10,6));
-        m.insert(std::pair<int, int>(8,2));
-        m.insert(std::pair<int, int>(12,4));
-        m.insert(std::pair<int, int>(11,7));
-        m.insert(std::pair<int, int>(14,7));
-        std::map<int,int>::iterator it = m.begin();
-        for (; it != m.end(); it++)
-        {
-          std::cout << it->first << " " << it->second << std::endl;
-        }
+        //  std::vector<int> a;
+        ft::map<int,int> m;      
+
+        ft::map<int,int>::iterator it = m.begin();
+        std::cout << it->first << std::endl;
+
+
+
+        // std::map<int,int> m;      
+
+
+        // std::map<int,int>::iterator it = m.begin();
+        // std::cout << it->first << std::endl;
+
+
+        // m.insert(std::pair<int, int>(10,6));
+        // m.insert(std::pair<int, int>(8,2));
+        // m.insert(std::pair<int, int>(12,4));
+        // m.insert(std::pair<int, int>(11,7));
+        // m.insert(std::pair<int, int>(14,7));
+        // ft::map<int,int>::iterator it = m.begin();
+        // std::cout << it << std::endl;
+        // for (; it != m.end(); it++)
+        // {
+        //   std::cout << it->first << " " << it->second << std::endl;
+        // }
         return (0);
         std::string str, ft_str;
         /*

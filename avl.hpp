@@ -46,7 +46,7 @@ namespace ft{
 
         ~avl()
         {
-            _alloc_node.deallocate(_end_node);
+            _alloc_node.deallocate(_end_node, 1);
         }
 
         Node *get_head(Node *node)
@@ -324,7 +324,7 @@ namespace ft{
             return (node == NULL);
         }
 
-        size_type   max_type() const
+        size_type   max_size() const
         {
             return (this->_alloc_node.max_size());
         }

@@ -20,8 +20,9 @@ namespace ft{
     public:
         map_iterator()
         {
+            this->_node = NULL;
         }
-        
+
         map_iterator(Tree *tree, Node *node)
         {
             this->_tree = tree;
@@ -34,8 +35,6 @@ namespace ft{
             *this = it;
         }
 
-        Node *base(){return (this->_node);}
-
         map_iterator &operator = (const map_iterator &it)
         {
             this->_tree = it._tree;
@@ -47,29 +46,45 @@ namespace ft{
         {
         }
 
+		operator map_iterator<const value_type, const Node, Tree>() const {
+			return (map_iterator<const value_type, const Node, Tree>(*_tree, _node));
+		}
+
         map_iterator & operator ++ ()
         {
-            this->_node = this->_tree->getsuccesor(this->_node);
+            if (this->_node == this->_tree.max_node())
+                this->_node = this->_tree._end_node;
+            else
+                this->_node = this->_tree->getsuccesor(this->_node);
             return (*this);
         }
 
         map_iterator   operator ++ (int)
         {
             Node *tmp = this->_node;
-            this->_node = this->_tree->getsuccesor(this->_node);
+            if (this->_node == this->_tree.max_node())
+                this->_node = this->_tree._end_node;
+            else
+                this->_node = this->_tree->getsuccesor(this->_node);
             return (map_iterator(this->_tree, tmp));
         }
 
         map_iterator & operator -- ()
         {
-            this->_node = this->_tree->getpresuccesor(this->_node);
+            if (this->_node == this->_tree.min_node())
+                this->_node = this->_tree._end_node;
+            else
+                this->_node = this->_tree->getpresuccesor(this->_node);
             return (*this);
         }
 
         map_iterator   operator -- (int)
         {
             Node *tmp = this->_node;
-            this->_node = this->_tree->getpresuccesor(this->_node);
+            if (this->_node == this->_tree.min_node())
+                this->_node = this->_tree._end_node;
+            else
+                this->_node = this->_tree->getpresuccesor(this->_node);
             return (map_iterator(this->_tree, tmp));
         }    
 
@@ -83,12 +98,12 @@ namespace ft{
             return (map_iterator(this->_tree, tmp));
         }
 
-        reference operator * ()
+        reference operator *()  const 
         {
             return (*(this->_node->value));
         }
 
-        reference operator -> ()
+        reference operator ->()  const 
         {
             return (this->_node->value);
         }
@@ -98,6 +113,11 @@ namespace ft{
 
         template <class it, class it2>
         friend bool operator!= (const it &i, const it2 &i2);
+
+        Node *base()
+        {
+            return (this->_node);
+        }
 
     };
     
