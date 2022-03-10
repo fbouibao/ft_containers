@@ -51,14 +51,16 @@ namespace ft{
 
         Node *get_head(Node *node)
         {
-        	Node * nodeParent = node->parent;
-			while (nodeParent != NULL) {
+        	Node * nodeParent = node;
+			while (1) {
+                if (nodeParent == NULL || nodeParent->parent == NULL)
+                    return (nodeParent);
 				nodeParent = nodeParent->parent;
 			}
 			return (nodeParent);
         }
 
-        Node *new_node(value_type pair_val, Node *parent)
+        Node *new_node(const value_type &pair_val, Node *parent)
         {
             Node *node = this->_alloc_node.allocate(1);
             node->value = this->_alloc_pair.allocate(1);
@@ -66,7 +68,7 @@ namespace ft{
             node->left = NULL;
             node->right = NULL;
             node->parent = parent;
-            node->hight = 1;
+            node->height = 1;
             return (node);
         }
 
@@ -145,27 +147,41 @@ namespace ft{
         }
 
 
-        Node *insert_node(Node *node, key k, T value, Node *parent = NULL)
+        Node *insert(Node * &node, key k, T value, Node *parent = NULL)
         {
             Node *tmp;
-
             if (node == NULL)
             {
+                ft::pair<int,int> p = ft::make_pair<key, T>(k, value);
+            
+
                 node = this->new_node(ft::make_pair<key, T>(k, value), parent);
                 tmp = node;
                 this->_node = get_head(node);
+                // std::cout << "here1" << std::endl;
+            // std::cout << this->_node->value->first << " " << this->_node->value->second <<  std::endl;
+
                 return (tmp);
             }
             if (this->_ob_c(k, node->value->first))
             {
-                tmp = insert_node(node->left, k, value, node);
+                // std::cout << "here2" << std::endl;
+            // std::cout << this->_node->value->first << " " << this->_node->value->second <<  std::endl;
+                
+                tmp = insert(node->left, k, value, node);
             }
             else if (this->_ob_c(node->value->first, k))
             {
-                tmp = insert_node(node->right, k, value, node);
+                // std::cout << "here3" << std::endl;
+                
+                tmp = insert(node->right, k, value, node);
+                // if (node->right)
+            // std::cout << _node->right->value->first << " " << _node->right->value->second <<  std::endl;
             }
             else
             {
+            // std::cout << this->_node->value->first << " " << this->_node->value->second <<  std::endl;
+
                 this->_node = get_head(node);
                 return (node);
             }
@@ -193,6 +209,11 @@ namespace ft{
                 node = rotate_left(node);
             }
             this->_node = get_head(node);
+            // std::cout << this->_node->value->first << " " << this->_node->value->second <<  std::endl;
+                // std::cout << "here4" << std::endl;
+
+            // std::cout << this->_node->value->first << " " << this->_node->value->second <<  std::endl;
+
             return (tmp);
         }
 
@@ -331,11 +352,17 @@ namespace ft{
 
         Node *getsuccesor(const Node *node)
         {
-            if (node == NULL)
-                return (NULL);
-            if (node->right)
-                return (min_node(node->right));
-            return (NULL);
+				if (node == NULL)
+					return NULL;
+				if (node->right)
+					return (min_node(node->right));
+
+				Node * nodeParent = node->parent;
+				while (nodeParent != NULL && node == nodeParent->right) {
+					node = nodeParent;
+					nodeParent = nodeParent->parent;
+				}
+				return (nodeParent);
         }
 
         Node *getpresuccesor(const Node *node)
@@ -346,8 +373,24 @@ namespace ft{
                 return (min_node(node->left));
             return (NULL);
         }
+
+        void displayallnode()
+        {
+            Node *nd = this->min_node(this->_node);
+            std::cout << nd->value->first << " " << nd->value->second << std::endl;
+            while (nd != _end_node)
+            {
+
+                nd = getsuccesor(nd);
+                std::cout << nd->value->first << " " << nd->value->second << std::endl;
+                if (nd == this->max_node(this->_node))
+                    break;
+            }
+            
+            
+        }
+
     };
     
- 
     
 }

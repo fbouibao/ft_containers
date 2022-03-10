@@ -171,7 +171,14 @@ namespace ft
 
 		pair<iterator,bool> insert (const value_type& val)
 		{
+			iterator it = this->find(val.first);
 
+			if (it == this->end())
+				return (ft::make_pair<iterator, bool>(it, false));
+
+			Node *tmp = this->_tree->insert(this->_tree->_node, val.first, val.second);
+			++(this->_size);
+			return (ft::make_pair<iterator, bool>(iterator(this->_tree, tmp), true));
 		}
 
 		iterator insert (iterator position, const value_type& val)
@@ -209,6 +216,57 @@ namespace ft
 		{
 			
 		}
+
+        iterator find (const key_type& k)
+        {
+			Node *n = _tree->search(_tree->_node, k);
+			if (n)
+				return (iterator(this->_tree, n));
+			return (this->end());
+        }
+
+        const_iterator find (const key_type& k) const
+        {
+			Node *n = _tree->search(_tree->_node, k);
+			if (n)
+				return (const_iterator(this->_tree, n));
+			return (this->end());
+        }
+
+        size_type count (const key_type& k) const
+        {
+
+        }
+
+        iterator lower_bound (const key_type& k)
+        {
+
+        }
+
+        const_iterator lower_bound (const key_type& k) const
+        {
+
+        }
+
+        iterator upper_bound (const key_type& k)
+        {
+
+        }
+
+        const_iterator upper_bound (const key_type& k) const
+        {
+
+        }
+
+        pair<const_iterator,const_iterator> equal_range (const key_type& k) const
+        {
+            
+        }
+
+        pair<iterator,iterator>             equal_range (const key_type& k)
+        {
+            
+        }
 	};
 
 

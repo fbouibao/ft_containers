@@ -1,4 +1,5 @@
 #include "vector.hpp"
+#include "avl.hpp"
 #include <vector>
 #include <memory>
 #include <math.h>
@@ -9,6 +10,23 @@
 
 int main ()
 {
+  // avl testing
+
+  ft::avl<ft::pair<int, int> > a;
+
+
+
+  a.insert(a._node, 9, 6);
+  a.insert(a._node, 10, 6);
+  a.insert(a._node, 11, 6);
+std::cout << a._node->value->first << std::endl;
+  a.insert(a._node, 12, 6);
+  // a.insert(a._node, 13, 6);
+
+
+
+  a.displayallnode();
+
   // int *ssa;
   // ssa = (int*)malloc(sizeof(int) * 555555555);
   
@@ -18,10 +36,11 @@ int main ()
 
   // return (0);
         //  std::vector<int> a;
-        ft::map<int,int> m;      
-
-        ft::map<int,int>::iterator it = m.begin();
-        std::cout << it->first << std::endl;
+        // ft::map<int,int> m;      
+        // m.insert(ft::pair<int, int>(10,6));
+        // ft::map<int,int>::iterator it = m.begin();
+        
+        // std::cout << it->first << std::endl;
 
 
 

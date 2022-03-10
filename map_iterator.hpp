@@ -46,9 +46,9 @@ namespace ft{
         {
         }
 
-		operator map_iterator<const value_type, const Node, Tree>() const {
-			return (map_iterator<const value_type, const Node, Tree>(*_tree, _node));
-		}
+		// operator map_iterator<const value_type, const Node, Tree>() const {
+		// 	return (map_iterator<const value_type, const Node, Tree>(*_tree, _node));
+		// }
 
         map_iterator & operator ++ ()
         {
@@ -114,7 +114,7 @@ namespace ft{
         template <class it, class it2>
         friend bool operator!= (const it &i, const it2 &i2);
 
-        Node *base()
+        Node *base()  const
         {
             return (this->_node);
         }
