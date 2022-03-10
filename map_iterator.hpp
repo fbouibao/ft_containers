@@ -14,8 +14,8 @@ namespace ft{
         typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::iterator_category iterator_category;
 
     private:
-        Tree _tree;
-        Node _node;
+        Tree *_tree;
+        Node *_node;
 
     public:
         map_iterator()
@@ -103,7 +103,7 @@ namespace ft{
             return (*(this->_node->value));
         }
 
-        reference operator ->()  const 
+        pointer operator ->()  const 
         {
             return (this->_node->value);
         }
