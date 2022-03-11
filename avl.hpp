@@ -102,21 +102,22 @@ namespace ft{
 			*/
 
 
-        Node *rotate_right(Node *node)
+        Node *rotate_right(Node *z)
         {
-            Node *b = node->left;
-            Node *n2 = b->right;
- 
-            b->right = node;
-            node->left = n2;
-            b->parent = node->parent;
-            node->parent = b;
-            if (n2)
-                n2->parent = node;
-            node->height = this->max(this->node_height(node->left), this->node_height(node->right)) + 1;
-            b->height = this->max(this->node_height(b->left), this->node_height(b->right)) + 1;
-            this->_node = get_head(node);
-            return (b);
+				Node * y = z->left;
+				Node * T3 = y->right;
+
+				y->right = z;
+				z->left = T3;
+				
+				y->parent = z->parent;
+				z->parent = y;
+				if (T3)
+					T3->parent = z;
+
+				z->height = this->max(this->node_height(z->left), this->node_height(z->right)) + 1;
+				y->height = this->max(this->node_height(y->left), this->node_height(y->right)) + 1;
+				return (y);
         }
 
 		/*
@@ -129,21 +130,25 @@ namespace ft{
               3   4
 		*/
 
-        Node *rotate_left(Node *node)
+        Node *rotate_left(Node *z)
         {
-            Node *b = node->right;
-            Node *n2 = b->left;
+           				Node	*	y = z->right;
+				Node	*	T2 = y->left;
 
-            b->right = node;
-            node->left = n2;
-            b->parent = node->parent;
-            node->parent = b;
-            if (n2)
-                n2->parent = node;
-            node->height = this->max(this->node_height(node->left), this->node_height(node->right)) + 1;
-            b->height = this->max(this->node_height(b->left), this->node_height(b->right)) + 1;
-            this->_node = get_head(node);
-            return (b);
+				y->left = z;
+				z->right = T2;
+
+				y->parent = z->parent;
+				z->parent = y;
+				if (T2)
+					T2->parent = z;
+				
+				z->height = this->max(this->node_height(z->left), this->node_height(z->right)) + 1;
+				y->height = this->max(this->node_height(y->left), this->node_height(y->right)) + 1;
+
+				// return (y);
+            // this->_node = get_head(z);
+            return (y);
         }
 
 
@@ -187,23 +192,28 @@ namespace ft{
             }
             node->height = 1 + max(node_height(node->left), node_height(node->right));
             int balance = balanced(node);
-            if (std::abs(balance) > 1 && this->_ob_c(k, node->left->value->first))
+
+                // std::cout << "here2" << std::endl;
+            // return (tmp);
+            if (std::abs(balance) > 1 && node->left && this->_ob_c(k, node->left->value->first))
             {
+
                 rotate_right(node);
             }
+            // return (tmp);
 
-            if (std::abs(balance) > 1 && this->_ob_c(node->right->value->first, k))
+            if (std::abs(balance) > 1 && node->right && this->_ob_c(node->right->value->first, k))
             {
                 rotate_left(node);
             }
 
-            if (std::abs(balance) > 1 && this->_ob_c(node->left->value->first, k))
+            if (std::abs(balance) > 1 && node->left && this->_ob_c(node->left->value->first, k))
             {
                 node->left = rotate_left(node->left);
                 node = rotate_right(node);
             }
 
-            if (std::abs(balance) > 1 && this->_ob_c(k, node->right->value->first))
+            if (std::abs(balance) > 1 && node->right && this->_ob_c(k, node->right->value->first))
             {
                 node->right = rotate_right(node->right);
                 node = rotate_left(node);

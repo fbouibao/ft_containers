@@ -39,7 +39,7 @@ namespace ft
 				{
 					return comp(x.first, y.first);
 				}
-			}																value_compare;
+			}															value_compare;
 			typedef		Alloc												allocator_type;
 			typedef		typename	allocator_type::reference				reference;
 			typedef		typename	allocator_type::const_reference			const_reference;
@@ -50,6 +50,7 @@ namespace ft
 		private:
 			typedef		avl<value_type, Compare, Alloc> Tree;
 			typedef		typename avl<value_type, Compare, Alloc>::Node Node;
+			typename Alloc::template rebind<Tree>::other _alloc_avl;
 			Tree				*_tree;
 			size_type			_size;
 			allocator_type		_map_alloc;
@@ -60,8 +61,12 @@ namespace ft
 			typedef		ft::reverse_iterator<iterator>						reverse_iterator;
 			typedef		ft::reverse_iterator<const_iterator>				const_reverse_iterator;
 
+		
+		
+		
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
+			this->_tree = this->_alloc_avl.allocate(1);
 			this->_tree->_node = NULL;
 			this->_map_alloc = alloc;
 			this->_key_map_compare = comp;

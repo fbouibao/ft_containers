@@ -16,16 +16,16 @@ int main ()
 
 
 
-  a.insert(a._node, 9, 6);
-  a.insert(a._node, 10, 6);
-  a.insert(a._node, 11, 6);
-std::cout << a._node->value->first << std::endl;
-  a.insert(a._node, 12, 6);
-  // a.insert(a._node, 13, 6);
+//   a.insert(a._node, 9, 6);
+//   a.insert(a._node, 10, 6);
+//   a.insert(a._node, 11, 6);
+//  a.insert(a._node, 12, 6);
+//   a.insert(a._node, 2, 6);
+// std::cout << a._node->value->first << std::endl;
 
 
 
-  a.displayallnode();
+//   a.displayallnode();
 
   // int *ssa;
   // ssa = (int*)malloc(sizeof(int) * 555555555);
@@ -36,11 +36,11 @@ std::cout << a._node->value->first << std::endl;
 
   // return (0);
         //  std::vector<int> a;
-        // ft::map<int,int> m;      
-        // m.insert(ft::pair<int, int>(10,6));
-        // ft::map<int,int>::iterator it = m.begin();
+        ft::map<int,int> m;      
+        m.insert(ft::pair<int, int>(10,6));
+        ft::map<int,int>::iterator it = m.begin();
         
-        // std::cout << it->first << std::endl;
+        std::cout << it->first << std::endl;
 
 
 
