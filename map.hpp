@@ -178,7 +178,7 @@ namespace ft
 		{
 			iterator it = this->find(val.first);
 
-			if (it == this->end())
+			if (this->_tree->_node && it != this->end())
 				return (ft::make_pair<iterator, bool>(it, false));
 
 			Node *tmp = this->_tree->insert(this->_tree->_node, val.first, val.second);

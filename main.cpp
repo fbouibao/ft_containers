@@ -38,9 +38,17 @@ int main ()
         //  std::vector<int> a;
         ft::map<int,int> m;      
         m.insert(ft::pair<int, int>(10,6));
+        m.insert(ft::pair<int, int>(11,6));
+        m.insert(ft::pair<int, int>(12,6));
+        m.insert(ft::pair<int, int>(116,6));
+        m.insert(ft::pair<int, int>(2,6));
+        m.insert(ft::pair<int, int>(142,6));
         ft::map<int,int>::iterator it = m.begin();
         
-        std::cout << it->first << std::endl;
+        for (; it != m.end(); it++)
+        {
+          std::cout << it->first << " " << it->second << std::endl;
+        }
 
 
 

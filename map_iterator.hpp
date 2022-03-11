@@ -5,7 +5,7 @@
 
 namespace ft{
     template <class value_type_pair, class Node, class Tree>
-    class map_iterator : public base_iterator<std::bidirectional_iterator_tag, value_type_pair>
+    class map_iterator : base_iterator<std::bidirectional_iterator_tag, value_type_pair>
     {
         typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::difference_type difference_type;
         typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::value_type value_type;
@@ -23,7 +23,7 @@ namespace ft{
             this->_node = NULL;
         }
 
-        map_iterator(Tree *tree, Node *node)
+        map_iterator(const Tree *tree, Node *node)
         {
             this->_tree = tree;
             this->_node = node;
@@ -62,8 +62,8 @@ namespace ft{
         map_iterator   operator ++ (int)
         {
             Node *tmp = this->_node;
-            if (this->_node == this->_tree.max_node())
-                this->_node = this->_tree._end_node;
+            if (this->_node == this->_tree->max_node(this->_tree->_node))
+                this->_node = this->_tree->_end_node;
             else
                 this->_node = this->_tree->getsuccesor(this->_node);
             return (map_iterator(this->_tree, tmp));

@@ -26,9 +26,9 @@ namespace ft{
         {
             value_type* value;
             size_type height;
-            node* parent; // needed by find(), insert(), etc. (the rb tree uses it too by the way)
-            node* left;
-            node* right;
+            struct node* parent; // needed by find(), insert(), etc. (the rb tree uses it too by the way)
+            struct node* left;
+            struct node* right;
             int balance;
         }               Node;
 
@@ -132,7 +132,7 @@ namespace ft{
 
         Node *rotate_left(Node *z)
         {
-           				Node	*	y = z->right;
+				Node	*	y = z->right;
 				Node	*	T2 = y->left;
 
 				y->left = z;
@@ -146,9 +146,7 @@ namespace ft{
 				z->height = this->max(this->node_height(z->left), this->node_height(z->right)) + 1;
 				y->height = this->max(this->node_height(y->left), this->node_height(y->right)) + 1;
 
-				// return (y);
-            // this->_node = get_head(z);
-            return (y);
+				return (y);
         }
 
 
@@ -195,25 +193,25 @@ namespace ft{
 
                 // std::cout << "here2" << std::endl;
             // return (tmp);
-            if (std::abs(balance) > 1 && node->left && this->_ob_c(k, node->left->value->first))
+            if (balance > 1 && this->_ob_c(k, node->left->value->first) == true)
             {
 
-                rotate_right(node);
+                node = rotate_right(node);
             }
             // return (tmp);
 
-            if (std::abs(balance) > 1 && node->right && this->_ob_c(node->right->value->first, k))
+            if (balance < -1 && this->_ob_c(node->right->value->first, k) == true)
             {
-                rotate_left(node);
+                node = rotate_left(node);
             }
 
-            if (std::abs(balance) > 1 && node->left && this->_ob_c(node->left->value->first, k))
+            if (balance > 1 && this->_ob_c(node->left->value->first, k) == true)
             {
                 node->left = rotate_left(node->left);
                 node = rotate_right(node);
             }
 
-            if (std::abs(balance) > 1 && node->right && this->_ob_c(k, node->right->value->first))
+            if (balance < -1 && this->_ob_c(k, node->right->value->first))
             {
                 node->right = rotate_right(node->right);
                 node = rotate_left(node);
@@ -244,7 +242,7 @@ namespace ft{
             Node *tmp;
 
             tmp = node;
-            while (tmp->right)
+            while (tmp && tmp->right)
             {
                 tmp = tmp->right;
             }
