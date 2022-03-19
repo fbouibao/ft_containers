@@ -45,7 +45,9 @@ namespace ft{
 
         reference operator*()
         {
-            return (*(this->rvi - 1));
+            iterator_type tmp;
+            tmp = this->rvi;
+            return (*(--tmp));
         }
 
         pointer operator->()

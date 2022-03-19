@@ -42,6 +42,7 @@ namespace ft{
         {
             this->_node = NULL;
             this->_end_node = _alloc_node.allocate(1);
+            this->_end_node->height = 19;
         }
 
         ~avl()
@@ -155,9 +156,6 @@ namespace ft{
             Node *tmp;
             if (node == NULL)
             {
-                ft::pair<int,int> p = ft::make_pair<key, T>(k, value);
-            
-
                 node = this->new_node(ft::make_pair<key, T>(k, value), parent);
                 tmp = node;
                 this->_node = get_head(node);
@@ -225,11 +223,11 @@ namespace ft{
             return (tmp);
         }
 
-        Node *min_node(Node *node)
+        Node *min_node(const Node *node)
         {
             Node *tmp;
 
-            tmp = node;
+            tmp = (Node *)node;
             while (tmp->left)
             {
                 tmp = tmp->left;
@@ -237,16 +235,16 @@ namespace ft{
             return (tmp);
         }
 
-        Node *max_node(Node *node)
+        Node *max_node(const Node *node)
         {
-            Node *tmp;
+			Node	*	tmp = (Node *)node;
 
-            tmp = node;
-            while (tmp && tmp->right)
-            {
-                tmp = tmp->right;
-            }
-            return (tmp);
+			while (tmp->parent != NULL) {
+				tmp = tmp->parent;
+			}
+			while (tmp->right)
+				tmp = tmp->right;
+			return (tmp);
         }
 
         void delete_node(Node *node, key k)
@@ -343,8 +341,8 @@ namespace ft{
                 return ;
             remove_tre(node->left);
             remove_tre(node->right);
-            this->_alloc_pair.dealocate(node->value, 1);
-            this->_alloc_node.dealocate(node, 1);
+            this->_alloc_pair.deallocate(node->value, 1);
+            this->_alloc_node.deallocate(node, 1);
             node = NULL;
         }
     
@@ -360,26 +358,33 @@ namespace ft{
 
         Node *getsuccesor(const Node *node)
         {
-				if (node == NULL)
-					return NULL;
-				if (node->right)
-					return (min_node(node->right));
 
-				Node * nodeParent = node->parent;
-				while (nodeParent != NULL && node == nodeParent->right) {
-					node = nodeParent;
-					nodeParent = nodeParent->parent;
-				}
-				return (nodeParent);
+			if (node == NULL)
+				return NULL;
+			if (node->right)
+				return (min_node(node->right));
+
+			Node * nodeParent = node->parent;
+			while (nodeParent != NULL && node == nodeParent->right) {
+				node = nodeParent;
+				nodeParent = nodeParent->parent;
+			}
+			return (nodeParent);
         }
 
         Node *getpresuccesor(const Node *node)
         {
-            if (node == NULL)
-                return (NULL);
-            if (node->left)
-                return (min_node(node->left));
-            return (NULL);
+			if (node == NULL)
+				return (NULL);
+            
+			if (node->left)
+				return (max_node(node->left));
+			Node * nodeParent = node->parent;
+			while (nodeParent != NULL && node == nodeParent->left) {
+				node = nodeParent;
+				nodeParent = nodeParent->parent;
+			}
+			return (nodeParent);
         }
 
         void displayallnode()

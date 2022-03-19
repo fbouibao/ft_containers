@@ -1,136 +1,138 @@
-#pragma once
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_iterator.hpp                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/04 11:22:11 by ibaali            #+#    #+#             */
+/*   Updated: 2022/03/18 05:56:34 by fbouibao         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "base_iterator.hpp"
-// #include "avl.hpp"
+# pragma once
+# include "base_iterator.hpp"
+# include "iterator_traits.hpp"
+# include "avl.hpp"
+# include "pair.hpp"
 
-namespace ft{
-    template <class value_type_pair, class Node, class Tree>
-    class map_iterator : base_iterator<std::bidirectional_iterator_tag, value_type_pair>
-    {
-        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::difference_type difference_type;
-        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::value_type value_type;
-        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::pointer pointer;
-        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::reference reference;
-        typedef typename base_iterator<std::bidirectional_iterator_tag, value_type_pair>::iterator_category iterator_category;
+namespace ft {
+	template <	class value_type_pair, class Node, class Tree>
+	
+	class map_iterator : base_iterator<std::bidirectional_iterator_tag, value_type_pair> {
+		
+		public:
+			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::difference_type	difference_type;
+			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::value_type		value_type;
+			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::pointer			pointer;
+			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::reference			reference;
+			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::iterator_category	iterator_category;
+		private:
+		public:
+			Tree * _tree;
+			Node * _node;
+			Node * _save_node;
+		
+		public:
+		
+		map_iterator() {
+			this->_node = NULL;
+			this->_save_node = NULL;
+		}
 
-    private:
-        Tree *_tree;
-        Node *_node;
+		~map_iterator() {
+		}
+		
+		map_iterator(const Tree & tree, Node * ptr) {
+			this->_tree = (Tree*)&tree;
+			this->_node = ptr;
+			this->_node = _save_node;
+		}
 
-    public:
-        map_iterator()
-        {
-            this->_node = NULL;
-        }
+		map_iterator(const Tree * tree, Node * ptr) {
+			this->_tree = (Tree*)&tree;
+			this->_node = ptr;
+			this->_save_node = ptr;
+		}
 
-        map_iterator(const Tree *tree, Node *node)
-        {
-            this->_tree = tree;
-            this->_node = node;
-        }
-    
+		map_iterator(const map_iterator &it) { *this = it; }
 
-        map_iterator(const map_iterator &it)
-        {
-            *this = it;
-        }
+		operator map_iterator<const value_type, const Node, Tree>() const {
+			return (map_iterator<const value_type, const Node, Tree>(*_tree, _node));
+		}
 
-        map_iterator &operator = (const map_iterator &it)
-        {
-            this->_tree = it._tree;
-            this->_node = it._node;
-            return (*this);
-        }
+		Node	*	base () const { return (_node); }
 
-        ~map_iterator()
-        {
-        }
+		map_iterator & operator = (const map_iterator &it) {
+			this->_tree = it._tree;
+			this->_node = it._node;
+			this->_save_node = it._save_node;
+			return (*this);
+		}
 
-		// operator map_iterator<const value_type, const Node, Tree>() const {
-		// 	return (map_iterator<const value_type, const Node, Tree>(*_tree, _node));
-		// }
-
-        map_iterator & operator ++ ()
-        {
-            if (this->_node == this->_tree.max_node())
-                this->_node = this->_tree._end_node;
+		map_iterator & operator ++ () {
+			
+			// this->_tree->_node = this->_node;
+            if (this->_node == this->_tree->max_node(this->_node))
+                this->_node = NULL;
             else
                 this->_node = this->_tree->getsuccesor(this->_node);
             return (*this);
-        }
+		}
 
-        map_iterator   operator ++ (int)
-        {
-            Node *tmp = this->_node;
-            if (this->_node == this->_tree->max_node(this->_tree->_node))
-                this->_node = this->_tree->_end_node;
+		map_iterator  operator ++ (int) {
+			Node * tmp = this->_node;
+
+            if (this->_node == this->_tree->max_node(this->_node))
+                this->_node = NULL;
             else
                 this->_node = this->_tree->getsuccesor(this->_node);
-            return (map_iterator(this->_tree, tmp));
-        }
+			return (map_iterator(_tree, tmp));
+		}
 
-        map_iterator & operator -- ()
-        {
-            if (this->_node == this->_tree.min_node())
-                this->_node = this->_tree._end_node;
-            else
-                this->_node = this->_tree->getpresuccesor(this->_node);
-            return (*this);
-        }
+		map_iterator & operator -- () {
+			if (this->_node == NULL)
+				this->_node = _tree->max_node(this->_save_node);
+			else
+				this->_node = this->_tree->getpresuccesor(this->_node);
+			return (*this);
+		}
 
-        map_iterator   operator -- (int)
-        {
-            Node *tmp = this->_node;
-            if (this->_node == this->_tree.min_node())
-                this->_node = this->_tree._end_node;
-            else
-                this->_node = this->_tree->getpresuccesor(this->_node);
-            return (map_iterator(this->_tree, tmp));
-        }    
+		map_iterator  operator -- (int) {
+			Node * tmp = _node;
+			if (this->_node == NULL)
+				this->_node = _tree->max_node(this->_save_node);
+			else
+				this->_node = this->_tree->getpresuccesor(this->_node);
+			return (map_iterator(_tree, tmp));
+		}
 
-        map_iterator    operator + (difference_type a)
-        {
-            Node *tmp = this->_tree->getsuccesor(this->_node);
-            while (--a)
-            {
-                tmp = this->_tree->getsuccesor(this->_node);
-            }
-            return (map_iterator(this->_tree, tmp));
-        }
+		map_iterator operator + (difference_type a) const {
+			Node * tmp = _tree->getsuccesor(this->_node);
+			while (--a)
+				tmp = _tree->getsuccesor(tmp);
+			return (map_iterator(_tree, tmp));
+		}
 
-        reference operator *()  const 
-        {
-            return (*(this->_node->value));
-        }
+		reference operator * () const {
+			return (*(_node->value));
+		}
 
-        pointer operator ->()  const 
-        {
-            return (this->_node->value);
-        }
+		pointer operator -> () const {
+			return (_node->value);
+		}
 
-        template <class it, class it2>
-        friend bool operator== (const it &i, const it2 &i2);
+		template <class Iter, class Iter2>
+		friend	bool	operator == (const Iter &lit, const Iter2 &rit)
+		{
+			if ((lit.base() == NULL && rit.base() == rit._tree->_end_node) || (lit.base() == lit._tree->_end_node && rit.base() == NULL))
+				return (true);
+			return (lit.base() == rit.base());
+		}
 
-        template <class it, class it2>
-        friend bool operator!= (const it &i, const it2 &i2);
+		template <class Iter, class Iter2>
+		friend	bool	operator != (const Iter &lit, const Iter2 &rit)	{ return !(lit == rit); }
 
-        Node *base()  const
-        {
-            return (this->_node);
-        }
-
-    };
-    
-    template <class it, class it2>
-    bool operator== (const it &i, const it2 &i2)
-    {
-        return (i.base() == i2.base());
-    }
-
-    template <class it, class it2>
-    bool operator!= (const it &i, const it2 &i2)
-    {
-        return (!(i == i2));
-    }
+	};
 
 }

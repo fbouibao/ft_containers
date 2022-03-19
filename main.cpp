@@ -11,8 +11,9 @@
 int main ()
 {
   // avl testing
+        // std::cout << "jjjjjjj" << std::endl;
 
-  ft::avl<ft::pair<int, int> > a;
+  ft::avl<ft::pair<int, int> > *a;
 
 
 
@@ -23,7 +24,49 @@ int main ()
 //   a.insert(a._node, 2, 6);
 // std::cout << a._node->value->first << std::endl;
 
+        std::map<int, std::string> my_mm;
 
+        for (int i = 0; i < 5; ++i)
+        {
+            my_mm.insert(std::make_pair(13 + i, "HELLO"));
+        }
+
+        std::map<int, std::string>::iterator it5 = my_mm.begin();
+        for (it5 = my_mm.begin(); it5 != my_mm.end(); ++it5)
+        {
+            // my_mm.insert(std::make_pair(13, "HELLO"));
+        }
+
+
+        if (it5 == my_mm.end())
+          std::cout << "it5->first" << std::endl;
+
+        // it5 = NULL;
+        // std::cout << it5->first << std::endl;
+return (0);
+
+     std::map<int, char> m;
+    std::map<int, char>::iterator it, it1;
+
+    ft::map<int, char> my_m;
+    ft::map<int, char>::iterator my_it, my_it1, tmp;
+
+    for (int i = 0; i < 10; ++i)
+    {
+        my_m.insert(ft::make_pair(i, static_cast<char>(i + 97)));
+        m.insert(std::make_pair(i, static_cast<char>(i + 97)));
+    }
+
+    it = m.begin();
+    it1 = ++(m.begin());
+    my_it = my_m.begin();
+    my_it1 = ++(my_m.begin());
+
+        ft::map<int, char>::iterator ob(my_it);
+        //EQUAL(&(*my_it) == &(*ob));
+
+        ft::map<int, char>::const_iterator c_it, c_ob(my_it);
+        c_it = my_it;
 
 //   a.displayallnode();
 
@@ -36,19 +79,19 @@ int main ()
 
   // return (0);
         //  std::vector<int> a;
-        ft::map<int,int> m;      
-        m.insert(ft::pair<int, int>(10,6));
-        m.insert(ft::pair<int, int>(11,6));
-        m.insert(ft::pair<int, int>(12,6));
-        m.insert(ft::pair<int, int>(116,6));
-        m.insert(ft::pair<int, int>(2,6));
-        m.insert(ft::pair<int, int>(142,6));
-        ft::map<int,int>::iterator it = m.begin();
+        // ft::map<int,int> m;      
+        // m.insert(ft::pair<int, int>(10,6));
+        // m.insert(ft::pair<int, int>(11,6));
+        // m.insert(ft::pair<int, int>(12,6));
+        // m.insert(ft::pair<int, int>(116,6));
+        // m.insert(ft::pair<int, int>(2,6));
+        // m.insert(ft::pair<int, int>(142,6));
+        // ft::map<int,int>::iterator it = m.begin();
         
-        for (; it != m.end(); it++)
-        {
-          std::cout << it->first << " " << it->second << std::endl;
-        }
+        // for (; it != m.end(); it++)
+        // {
+        //   std::cout << it->first << " " << it->second << std::endl;
+        // }
 
 
 
