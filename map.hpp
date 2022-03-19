@@ -51,7 +51,7 @@ namespace ft
 			typedef		avl<value_type, Compare, Alloc> Tree;
 			typedef		typename avl<value_type, Compare, Alloc>::Node Node;
 			typename Alloc::template rebind<Tree>::other _alloc_avl;
-			Tree				*_tree;
+			Tree				_tree;
 			size_type			_size;
 			allocator_type		_map_alloc;
 			key_compare			_key_map_compare;
@@ -66,21 +66,21 @@ namespace ft
 		
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
-			this->_tree = this->_alloc_avl.allocate(1);
-			this->_alloc_avl.construct(this->_tree);
-			this->_tree->_node = NULL;
+			// this->_tree = this->_alloc_avl.allocate(1);
+			// this->_alloc_avl.construct(this->_tree);
+			this->_tree._node = NULL;
 			this->_map_alloc = alloc;
 			this->_key_map_compare = comp;
-			this->_tree->_ob_c = comp;
+			this->_tree._ob_c = comp;
 		}
 	
 		template <class InputIterator>
 		map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
-			this->_tree->_node = NULL;
+			this->_tree._node = NULL;
 			this->_map_alloc = alloc;
 			this->_key_map_compare = comp;
-			this->_tree->_ob_c = comp;
+			this->_tree._ob_c = comp;
 		}
 
 		map (const map& x)
@@ -97,8 +97,8 @@ namespace ft
 		{
 			this->_map_alloc = x._map_alloc;
 			this->_key_map_compare = x._key_map_compare;
-			this->_tree->_ob_c = x._tree->_ob_c;
-			this->_tree->remove_tre(this->_tree->_node);
+			this->_tree._ob_c = x._tree._ob_c;
+			this->_tree.remove_tre(this->_tree._node);
 			for (const_iterator it = x.begin(); it != x.end(); ++it)
 			{
 				this->insert(*it);
@@ -109,23 +109,23 @@ namespace ft
 
 	    iterator begin()
 		{
-			if (this->_tree->_node == NULL)
+			if (this->_tree._node == NULL)
 				return (iterator(_tree, NULL));
-			return (iterator(this->_tree, this->_tree->min_node(this->_tree->_node)));
+			return (iterator(_tree, _tree.min_node(_tree._node)));
 		}
 
 		const_iterator begin() const
 		{
-			if (this->_tree->_node == NULL)
+			if (this->_tree._node == NULL)
 				return (const_iterator(_tree, NULL));
-			return (const_iterator(this->_tree, this->_tree->min_node(this->_tree->_node)));
+			return (const_iterator(_tree, _tree.min_node(_tree._node)));
 		}
 
 			iterator end() {
-				return iterator(_tree, NULL);
+				return iterator(_tree, _tree._end_node);
 			}
 			const_iterator end() const {
-				return const_iterator(_tree, NULL);
+				return const_iterator(_tree, _tree._end_node);
 			}
 
 	    reverse_iterator rbegin()
@@ -160,7 +160,7 @@ namespace ft
 
 		size_type max_size() const
 		{
-			return (this->_tree->max_size());
+			return (this->_tree.max_size());
 		}
 
 			// mapped_type& operator[] (const key_type& k)		{
@@ -171,10 +171,10 @@ namespace ft
 		{
 			iterator it = this->find(val.first);
 
-			if (this->_tree->_node && it != this->end())
+			if (this->_tree._node && it != this->end())
 				return (ft::make_pair<iterator, bool>(it, false));
 
-			Node *tmp = this->_tree->insert(this->_tree->_node, val.first, val.second);
+			Node *tmp = this->_tree.insert(this->_tree._node, val.first, val.second);
 			++(this->_size);
 			return (ft::make_pair<iterator, bool>(iterator(this->_tree, tmp), true));
 		}
@@ -217,7 +217,7 @@ namespace ft
 
         iterator find (const key_type& k)
         {
-			Node *n = _tree->search(_tree->_node, k);
+			Node *n = _tree.search(_tree._node, k);
 			if (n)
 				return (iterator(this->_tree, n));
 			return (this->end());
@@ -225,7 +225,7 @@ namespace ft
 
         const_iterator find (const key_type& k) const
         {
-			Node *n = _tree->search(_tree->_node, k);
+			Node *n = _tree.search(_tree._node, k);
 			if (n)
 				return (const_iterator(this->_tree, n));
 			return (this->end());

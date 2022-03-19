@@ -13,7 +13,7 @@ int main ()
   // avl testing
         // std::cout << "jjjjjjj" << std::endl;
 
-  ft::avl<ft::pair<int, int> > *a;
+  //ft::avl<ft::pair<int, int> > *a;
 
 
 
@@ -24,14 +24,14 @@ int main ()
 //   a.insert(a._node, 2, 6);
 // std::cout << a._node->value->first << std::endl;
 
-        std::map<int, std::string> my_mm;
+        ft::map<int, std::string> my_mm;
 
         for (int i = 0; i < 5; ++i)
         {
-            my_mm.insert(std::make_pair(13 + i, "HELLO"));
+            my_mm.insert(ft::make_pair(13 + i, "HELLO"));
         }
 
-        std::map<int, std::string>::iterator it5 = my_mm.begin();
+        ft::map<int, std::string>::iterator it5 = my_mm.begin();
         for (it5 = my_mm.begin(); it5 != my_mm.end(); ++it5)
         {
             // my_mm.insert(std::make_pair(13, "HELLO"));

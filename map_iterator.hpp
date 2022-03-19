@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 11:22:11 by ibaali            #+#    #+#             */
-/*   Updated: 2022/03/18 05:56:34 by fbouibao         ###   ########.fr       */
+/*   Updated: 2022/03/19 16:52:28 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,14 @@ namespace ft {
 			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::pointer			pointer;
 			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::reference			reference;
 			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::iterator_category	iterator_category;
-		private:
 		public:
 			Tree * _tree;
 			Node * _node;
-			Node * _save_node;
 		
 		public:
 		
 		map_iterator() {
 			this->_node = NULL;
-			this->_save_node = NULL;
 		}
 
 		~map_iterator() {
@@ -46,13 +43,11 @@ namespace ft {
 		map_iterator(const Tree & tree, Node * ptr) {
 			this->_tree = (Tree*)&tree;
 			this->_node = ptr;
-			this->_node = _save_node;
 		}
 
 		map_iterator(const Tree * tree, Node * ptr) {
 			this->_tree = (Tree*)&tree;
 			this->_node = ptr;
-			this->_save_node = ptr;
 		}
 
 		map_iterator(const map_iterator &it) { *this = it; }
@@ -66,14 +61,13 @@ namespace ft {
 		map_iterator & operator = (const map_iterator &it) {
 			this->_tree = it._tree;
 			this->_node = it._node;
-			this->_save_node = it._save_node;
 			return (*this);
 		}
 
 		map_iterator & operator ++ () {
 			
 			// this->_tree->_node = this->_node;
-            if (this->_node == this->_tree->max_node(this->_node))
+            if (this->_node == this->_tree->max_node(this->_tree->_node))
                 this->_node = NULL;
             else
                 this->_node = this->_tree->getsuccesor(this->_node);
@@ -83,7 +77,7 @@ namespace ft {
 		map_iterator  operator ++ (int) {
 			Node * tmp = this->_node;
 
-            if (this->_node == this->_tree->max_node(this->_node))
+            if (this->_node == this->_tree->max_node(this->_tree->_node))
                 this->_node = NULL;
             else
                 this->_node = this->_tree->getsuccesor(this->_node);
@@ -91,8 +85,8 @@ namespace ft {
 		}
 
 		map_iterator & operator -- () {
-			if (this->_node == NULL)
-				this->_node = _tree->max_node(this->_save_node);
+			if (this->_node == NULL || this->_node == this->_tree->_end_node)
+				this->_node = _tree->max_node(this->_tree->_node);
 			else
 				this->_node = this->_tree->getpresuccesor(this->_node);
 			return (*this);
@@ -100,8 +94,8 @@ namespace ft {
 
 		map_iterator  operator -- (int) {
 			Node * tmp = _node;
-			if (this->_node == NULL)
-				this->_node = _tree->max_node(this->_save_node);
+			if (this->_node == NULL || this->_node == this->_tree->_end_node)
+				this->_node = _tree->max_node(this->_tree->_node);
 			else
 				this->_node = this->_tree->getpresuccesor(this->_node);
 			return (map_iterator(_tree, tmp));

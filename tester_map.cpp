@@ -183,9 +183,7 @@ void iterator_tests(void)
             for (ft::map<int, int>::iterator it = m.begin(); it != m.end(); ++it)
             {
                 res += it->first;
-                std::cout << it->first << std::endl;
             }
-            std::cout << "hhhhdddddddssssshhhhh" << std::endl;
             cond = res == 210;
         }
         {
@@ -215,7 +213,6 @@ void iterator_tests(void)
             ft::map<int, int> m;
             for (size_t i = 0; i < 5; ++i)
                 m.insert(ft::make_pair(myints[i], i));
-            std::cout << "dddddddd" << "\n";   
             ft::map<int, int>::iterator it = --m.end();
             for (;; --it)
             {

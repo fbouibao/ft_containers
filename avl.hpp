@@ -223,7 +223,7 @@ namespace ft{
             return (tmp);
         }
 
-        Node *min_node(const Node *node)
+        Node *min_node(const Node *node) const
         {
             Node *tmp;
 
@@ -235,13 +235,13 @@ namespace ft{
             return (tmp);
         }
 
-        Node *max_node(const Node *node)
+        Node *max_node(const Node *node) const
         {
 			Node	*	tmp = (Node *)node;
 
-			while (tmp->parent != NULL) {
-				tmp = tmp->parent;
-			}
+			// while (tmp->parent != NULL) {
+			// 	tmp = tmp->parent;
+			// }
 			while (tmp->right)
 				tmp = tmp->right;
 			return (tmp);
