@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 11:22:11 by ibaali            #+#    #+#             */
-/*   Updated: 2022/03/19 16:52:28 by fbouibao         ###   ########.fr       */
+/*   Updated: 2022/03/19 18:29:10 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ namespace ft {
 
 		map_iterator & operator ++ () {
 			
-			// this->_tree->_node = this->_node;
             if (this->_node == this->_tree->max_node(this->_tree->_node))
                 this->_node = NULL;
             else

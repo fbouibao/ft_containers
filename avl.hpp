@@ -47,7 +47,7 @@ namespace ft{
 
         ~avl()
         {
-            _alloc_node.deallocate(_end_node, 1);
+            // _alloc_node.deallocate(_end_node, 1);
         }
 
         Node *get_head(Node *node)

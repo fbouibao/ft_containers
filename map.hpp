@@ -66,12 +66,11 @@ namespace ft
 		
 		explicit map (const key_compare& comp = key_compare(), const allocator_type& alloc = allocator_type())
 		{
-			// this->_tree = this->_alloc_avl.allocate(1);
-			// this->_alloc_avl.construct(this->_tree);
 			this->_tree._node = NULL;
 			this->_map_alloc = alloc;
 			this->_key_map_compare = comp;
 			this->_tree._ob_c = comp;
+			this->_size = 0;
 		}
 	
 		template <class InputIterator>
@@ -81,6 +80,8 @@ namespace ft
 			this->_map_alloc = alloc;
 			this->_key_map_compare = comp;
 			this->_tree._ob_c = comp;
+			this->_size = 0;
+			this->insert(first, last);
 		}
 
 		map (const map& x)
@@ -171,7 +172,7 @@ namespace ft
 		{
 			iterator it = this->find(val.first);
 
-			if (this->_tree._node && it != this->end())
+			if (it != this->end())
 				return (ft::make_pair<iterator, bool>(it, false));
 
 			Node *tmp = this->_tree.insert(this->_tree._node, val.first, val.second);
@@ -181,13 +182,27 @@ namespace ft
 
 		iterator insert (iterator position, const value_type& val)
 		{
-			return (iterator(this->_tree, NULL));
+			(void)position;
+			iterator it = this->find(val.first);
+
+			if (it != this->end())
+				return (it);
+
+			Node *tmp = this->_tree.insert(this->_tree._node, val.first, val.second);
+			++(this->_size);
+			return (iterator(this->_tree, tmp));
 		}
 
 		template <class InputIterator>
 		void insert (InputIterator first, InputIterator last)
 		{
 
+			while (first != last)
+			{
+				this->insert(*first);
+				first++;
+			}
+			
 		}
 
     	void erase (iterator position)
