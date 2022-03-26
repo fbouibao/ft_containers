@@ -30,7 +30,8 @@ int main ()
   my_mm.insert(ft::make_pair(10, 6));
   my_mm.insert(ft::make_pair(11, 6));
   my_mm.insert(ft::make_pair(12, 6));
-  my_mm.erase(11);
+  my_mm.
+  erase(11);
 //         for (int i = 0; i < 5; ++i)
 //         {
 //             my_mm.insert(ft::make_pair(13 + i, "HELLO"));

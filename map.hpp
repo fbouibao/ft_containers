@@ -242,13 +242,10 @@ namespace ft
 			{
 				v.push_back(first->first);
 			}
-			std::cout << " size "  << v.size() << std::endl;
 			for (size_t i = 0; i < v.size(); i++)
 			{
 				this->erase(v[i]);
-				std::cout << "ddddddd" << std::endl;
 			}
-			std::cout << "hhhhhhhh" << std::endl;	
 		}
 
 		void swap (map& x)

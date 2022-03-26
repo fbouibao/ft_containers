@@ -295,12 +295,12 @@ namespace ft{
             int balance = balanced(node);
             if (balance > 1 && balanced(node->left) >= 0)
             {
-                rotate_right(node);
+                node = rotate_right(node);
             }
 
             if (balance < -1 && balanced(node->right) <= 0)
             {
-                rotate_left(node);
+                node = rotate_left(node);
             }
 
             if (balance > 1 && balanced(node->left) < 0)
@@ -335,7 +335,7 @@ namespace ft{
             return (tmp);
         }
 
-        void    remove_tre(Node *node)
+        void    remove_tre(Node * &node)
         {
             if (node == NULL)
                 return ;
