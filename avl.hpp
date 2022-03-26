@@ -247,7 +247,7 @@ namespace ft{
 			return (tmp);
         }
 
-        void delete_node(Node *node, key k)
+        void delete_node(Node * &node, key k)
         {
             if (node == NULL)
             {
@@ -279,37 +279,37 @@ namespace ft{
                         node->right = tmp->right;
                         node->height = tmp->height;
                     }
-                    this->_alloc_pair.dealocate(tmp->value, 1);
-                    this->_alloc_node.dealocate(tmp, 1);
+                    this->_alloc_pair.deallocate(tmp->value, 1);
+                    this->_alloc_node.deallocate(tmp, 1);
                 }
                 else
                 {
                     Node *min = min_node(node->right);
                     std::swap(min->value, node->value);
-                    this->delete_node(node->right, node->value->first);
+                    this->delete_node(node->right, min->value->first);
                 }
             }
             if (node == NULL)
                 return ;
             node->height = 1 + max(node_height(node->left), node_height(node->right));
             int balance = balanced(node);
-            if (std::abs(balance) > 1 && balanced(node->left) >= 0)
+            if (balance > 1 && balanced(node->left) >= 0)
             {
                 rotate_right(node);
             }
 
-            if (std::abs(balance) > 1 && balanced(node->right) <= 0)
+            if (balance < -1 && balanced(node->right) <= 0)
             {
                 rotate_left(node);
             }
 
-            if (std::abs(balance) > 1 && balanced(node->left) < 0)
+            if (balance > 1 && balanced(node->left) < 0)
             {
                 node->left = rotate_left(node->left);
                 node = rotate_right(node);
             }
 
-            if (std::abs(balance) > 1 && balanced(node->right) > 0)
+            if (balance < -1 && balanced(node->right) > 0)
             {
                 node->right = rotate_right(node->right);
                 node = rotate_left(node);
@@ -317,7 +317,7 @@ namespace ft{
             this->_node = get_head(node);
         }
 
-        Node *search(Node *node, key k)
+        Node *search(Node *node, key k) const
         {
             Node *tmp;
 
@@ -343,6 +343,7 @@ namespace ft{
             remove_tre(node->right);
             this->_alloc_pair.deallocate(node->value, 1);
             this->_alloc_node.deallocate(node, 1);
+            // this->_node.value
             node = NULL;
         }
     
@@ -393,7 +394,6 @@ namespace ft{
             std::cout << nd->value->first << " " << nd->value->second << std::endl;
             while (nd != _end_node)
             {
-
                 nd = getsuccesor(nd);
                 std::cout << nd->value->first << " " << nd->value->second << std::endl;
                 if (nd == this->max_node(this->_node))
@@ -401,6 +401,34 @@ namespace ft{
             }
             
             
+        }
+
+			ft::pair<T&, bool>			operator[] (const key& k) {
+				Node	*	tmp = this->search(this->_node, k);
+				if (tmp != NULL)
+					return (ft::make_pair<T&, bool>(tmp->value->second, false));
+				tmp = this->insert(this->_node, k, T());
+				return (ft::make_pair<T&, bool>(tmp->value->second, true));
+			}
+
+        Node* bound(const Node *node, const key &k) const
+        {
+            	Node * current = (Node *)node;
+				Node * tmp_current = (Node *)node;
+				while (current)
+				{
+					// if (k < current->value->first) {
+					if (_ob_c(k, current->value->first)) {
+						tmp_current = current;
+						current = current->left;
+					}
+					// else if (k > current->value->first)
+					else if ((_ob_c(current->value->first, k)))
+						current = current->right;
+					else
+						return current;
+				}
+				return tmp_current;
         }
 
     };

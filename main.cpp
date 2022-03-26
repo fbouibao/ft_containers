@@ -13,7 +13,7 @@ int main ()
   // avl testing
         // std::cout << "jjjjjjj" << std::endl;
 
-  //ft::avl<ft::pair<int, int> > *a;
+//   ft::avl<ft::pair<int, int> > a;
 
 
 
@@ -21,29 +21,34 @@ int main ()
 //   a.insert(a._node, 10, 6);
 //   a.insert(a._node, 11, 6);
 //  a.insert(a._node, 12, 6);
+//  a.delete_node(a._node, 10);
 //   a.insert(a._node, 2, 6);
 // std::cout << a._node->value->first << std::endl;
-ft::pair<int, std::string> aww;
-        ft::map<int, std::string> my_mm;
+// ft::pair<int, std::string> aww;
+        ft::map<int, int> my_mm;
+  my_mm.insert(ft::make_pair(9, 6));
+  my_mm.insert(ft::make_pair(10, 6));
+  my_mm.insert(ft::make_pair(11, 6));
+  my_mm.insert(ft::make_pair(12, 6));
+  my_mm.erase(11);
+//         for (int i = 0; i < 5; ++i)
+//         {
+//             my_mm.insert(ft::make_pair(13 + i, "HELLO"));
+//         }
+//         ft::map<int, std::string>::iterator it5 = my_mm.begin();
+//         for (it5 = my_mm.begin(); it5 != my_mm.end(); ++it5)
+//         {
+//           //std::cout << *it5 << std::endl;
+//         aww = *it5;
+//         break;
+//          // std::cout << aww << std::endl;
 
-        for (int i = 0; i < 5; ++i)
-        {
-            my_mm.insert(ft::make_pair(13 + i, "HELLO"));
-        }
-        ft::map<int, std::string>::iterator it5 = my_mm.begin();
-        for (it5 = my_mm.begin(); it5 != my_mm.end(); ++it5)
-        {
-          //std::cout << *it5 << std::endl;
-        aww = *it5;
-        break;
-         // std::cout << aww << std::endl;
+//         }
 
-        }
+//          std::cout << (*it5).first << std::endl;
 
-         std::cout << (*it5).first << std::endl;
-
-        if (it5 == my_mm.end())
-          std::cout << "it5->first" << std::endl;
+//         if (it5 == my_mm.end())
+//           std::cout << "it5->first" << std::endl;
 
         // it5 = NULL;
         // std::cout << it5->first << std::endl;

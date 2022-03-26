@@ -4,9 +4,8 @@
 
 // you should include your path to this files
 
-#include "map.hpp"       // your Map path.
-#include "map_iterator.hpp"       // your Map path.
-#include "vector.hpp" // your Vector path.
+#include "map.hpp"       // your map path.
+#include "vector.hpp" // your vector path.
 #include "pair.hpp"  // path to ft::pair.
 // #include "map-test-helper.hpp"
 #include <map>
@@ -63,50 +62,50 @@ struct classcomp
     }
 };
 
-// bool testMapConstructors()
-// {
-//     bool cond;
-//     std::map<char, int> first;
-//     ft::map<char, int> m_first;
+bool testMapConstructors()
+{
+    bool cond;
+    std::map<char, int> first;
+    ft::map<char, int> m_first;
 
-//     for (size_t i = 97; i < 110; i++)
-//     {
-//         first[i - 97] = i;
-//         m_first[i - 97] = i;
-//     }
+    for (size_t i = 97; i < 110; i++)
+    {
+        first[i - 97] = i;
+        m_first[i - 97] = i;
+    }
 
-//     std::map<char, int> copy(first);
-//     ft::map<char, int> m_copy(m_first);
+    std::map<char, int> copy(first);
+    ft::map<char, int> m_copy(m_first);
 
-//     cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
+    cond = first.size() == m_first.size() && compareMaps(first.begin(), first.end(), m_first.begin(), m_first.end());
 
-//     std::map<char, int> second(first.begin(), first.end());
-//     ft::map<char, int> m_second(m_first.begin(), m_first.end());
+    std::map<char, int> second(first.begin(), first.end());
+    ft::map<char, int> m_second(m_first.begin(), m_first.end());
 
-//     cond = cond && second.size() == m_second.size() && compareMaps(second.begin(), second.end(), m_second.begin(), m_second.end());
-//     std::map<char, int> third(second);
-//     ft::map<char, int> m_third(m_second);
+    cond = cond && second.size() == m_second.size() && compareMaps(second.begin(), second.end(), m_second.begin(), m_second.end());
+    std::map<char, int> third(second);
+    ft::map<char, int> m_third(m_second);
 
-//     cond = cond && third.size() == m_third.size() && compareMaps(third.begin(), third.end(), m_third.begin(), m_third.end());
+    cond = cond && third.size() == m_third.size() && compareMaps(third.begin(), third.end(), m_third.begin(), m_third.end());
 
-//     std::map<char, int, classcomp> fourth;  // class as Compare
-//     ft::map<char, int, classcomp> m_fourth; // class as Compare
+    std::map<char, int, classcomp> fourth;  // class as Compare
+    ft::map<char, int, classcomp> m_fourth; // class as Compare
 
-//     cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
+    cond = fourth.size() == m_fourth.size() && cond && compareMaps(fourth.begin(), fourth.end(), m_fourth.begin(), m_fourth.end());
 
-//     bool (*fn_pt)(char, char) = fncomp;
-//     std::map<char, int, bool (*)(char, char)> fifth(fn_pt);  // function pointer as Compare
-//     ft::map<char, int, bool (*)(char, char)> m_fifth(fn_pt); // function pointer as Compare
+    bool (*fn_pt)(char, char) = fncomp;
+    std::map<char, int, bool (*)(char, char)> fifth(fn_pt);  // function pointer as Compare
+    ft::map<char, int, bool (*)(char, char)> m_fifth(fn_pt); // function pointer as Compare
 
-//     cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
+    cond = fifth.size() == m_fifth.size() && cond && compareMaps(fifth.begin(), fifth.end(), m_fifth.begin(), m_fifth.end());
 
-//     first = std::map<char, int>();
-//     m_first = ft::map<char, int>();
+    first = std::map<char, int>();
+    m_first = ft::map<char, int>();
 
-//     cond = copy.size() == m_copy.size() && cond && compareMaps(copy.begin(), copy.end(), m_copy.begin(), m_copy.end());
+    cond = copy.size() == m_copy.size() && cond && compareMaps(copy.begin(), copy.end(), m_copy.begin(), m_copy.end());
 
-//     return cond;
-// }
+    return cond;
+}
 
 void iterator_tests(void)
 {
@@ -170,7 +169,6 @@ void iterator_tests(void)
     }
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " ++it operator "
               << "] --------------------]\t\t\033[0m";
-              
     {
         /*---------------------------------- time limit test --------------------------------------------*/
         bool cond(false);
@@ -181,9 +179,7 @@ void iterator_tests(void)
             for (size_t i = 0; i < 5; ++i)
                 m.insert(ft::make_pair(myints[i], i));
             for (ft::map<int, int>::iterator it = m.begin(); it != m.end(); ++it)
-            {
                 res += it->first;
-            }
             cond = res == 210;
         }
         {
@@ -204,7 +200,6 @@ void iterator_tests(void)
     }
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " --it operator "
               << "] --------------------]\t\t\033[0m";
-             
     {
         /*---------------------------------- time limit test --------------------------------------------*/
         int res(0);
@@ -288,7 +283,6 @@ void const_iterator_tests(void)
         /*---------------------------------------------- */
         EQUAL(it->second.length() == my_it->second.length());
     }
-           
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " ++it operator "
               << "] --------------------]\t\t\033[0m";
     ++my_it; // I incremented here to make sure that the object changes
@@ -467,9 +461,9 @@ void testConstructors()
     }
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " Constructors with costum compare "
               << "] --------------------]\t\t\033[0m";
-    // EQUAL(testMapConstructors());
-    // std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator= (lhs.size = rhs.size) "
-    //           << "] --------------------]\t\t\033[0m";
+    EQUAL(testMapConstructors());
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator= (lhs.size = rhs.size) "
+              << "] --------------------]\t\t\033[0m";
     {
         /*------------------ std::map ---------------------*/
         std::map<int, std::string> m1;
@@ -675,7 +669,7 @@ void testIterators()
         ft::map<int, std::string> const ft_m2(ft_m1.begin(), ft_m1.end());
 
         /*-----------------------------------------------------*/
-        /*------------------ ft::maps ---------------------*/
+        /*------------------ ft::Maps ---------------------*/
         /*----------------------------------------------------*/
         /*------------------ strings to store the results ----*/
         std::string res, ft_res, c_res, c_ft_res;
@@ -715,7 +709,7 @@ void testIterators()
         ft::map<int, std::string> const ft_m2(ft_m1.rbegin(), ft_m1.rend());
 
         /*-----------------------------------------------------*/
-        /*------------------ ft::maps ---------------------*/
+        /*------------------ ft::Maps ---------------------*/
         /*----------------------------------------------------*/
         /*------------------ strings to store the results ----*/
         std::string res, ft_res, c_res, c_ft_res;
@@ -758,7 +752,7 @@ void testCapacityMethods()
         std::map<int, std::string> m4(m3);                     // copy constructor
         std::map<int, std::string> m5(m1.rbegin(), m1.rend()); // range constructor with reverse iterators
         /*-----------------------------------------------------*/
-        /*------------------ ft::maps ---------------------*/
+        /*------------------ ft::Maps ---------------------*/
         ft::map<int, std::string> ft_m2;
         ft::map<int, std::string> ft_m3(ft_m1.begin(), ft_m1.end());
         ft::map<int, std::string> ft_m4(ft_m1);
@@ -770,37 +764,37 @@ void testCapacityMethods()
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " empty method "
               << "] --------------------]\t\t\033[0m";
     {
-        // std::map<int, std::string> m1;
-        // std::map<int, std::string> m2;
-        // ft::map<int, std::string> ft_m1;
-        // ft::map<int, std::string> ft_m2;
-        // m1[0] = "stringsrtring";
-        // ft_m1[0] = "stringsrtring";
-        // EQUAL(m1.empty() == ft_m1.empty() && m2.empty() == ft_m2.empty());
+        std::map<int, std::string> m1;
+        std::map<int, std::string> m2;
+        ft::map<int, std::string> ft_m1;
+        ft::map<int, std::string> ft_m2;
+        m1[0] = "stringsrtring";
+        ft_m1[0] = "stringsrtring";
+        EQUAL(m1.empty() == ft_m1.empty() && m2.empty() == ft_m2.empty());
     }
 }
 
-// void testElementAccess()
-// {
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator [] "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         std::map<char, std::string> m;
-//         ft::map<char, std::string> ft_m;
+void testElementAccess()
+{
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator [] "
+              << "] --------------------]\t\t\033[0m";
+    {
+        std::map<char, std::string> m;
+        ft::map<char, std::string> ft_m;
 
-//         m['a'] = "an element";
-//         m['b'] = "another element";
-//         m['c'] = m['b'];
-//         m['a'] = "test";
+        m['a'] = "an element";
+        m['b'] = "another element";
+        m['c'] = m['b'];
+        m['a'] = "test";
 
-//         ft_m['a'] = "an element";
-//         ft_m['b'] = "another element";
-//         ft_m['c'] = ft_m['b'];
-//         ft_m['a'] = "test";
+        ft_m['a'] = "an element";
+        ft_m['b'] = "another element";
+        ft_m['c'] = ft_m['b'];
+        ft_m['a'] = "test";
 
-//         EQUAL(m['a'] == ft_m['a'] && m['b'] == ft_m['b'] && m['c'] == ft_m['c'] && m.size() == ft_m.size());
-//     }
-// }
+        EQUAL(m['a'] == ft_m['a'] && m['b'] == ft_m['b'] && m['c'] == ft_m['c'] && m.size() == ft_m.size());
+    }
+}
 
 void testModifiers()
 {
@@ -856,233 +850,233 @@ void testModifiers()
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " erase method "
               << "] --------------------]\t\t\033[0m";
 
-    // {
-    //     bool cond(false);
-    //     // erasing all the elements in the map;
-    //     std::map<char, int> m;
-    //     ft::map<char, int> ft_m;
-    //     std::map<char, int>::iterator it;
-    //     ft::map<char, int>::iterator ft_it;
+    {
+        bool cond(false);
+        // erasing all the elements in the map;
+        std::map<char, int> m;
+        ft::map<char, int> ft_m;
+        std::map<char, int>::iterator it;
+        ft::map<char, int>::iterator ft_it;
 
-    //     // insert some values:
-    //     ft_m['a'] = 10;
-    //     ft_m['b'] = 20;
-    //     ft_m['c'] = 30;
-    //     ft_m['d'] = 40;
-    //     ft_m['e'] = 50;
-    //     ft_m['f'] = 60;
+        // insert some values:
+        ft_m['a'] = 10;
+        ft_m['b'] = 20;
+        ft_m['c'] = 30;
+        ft_m['d'] = 40;
+        ft_m['e'] = 50;
+        ft_m['f'] = 60;
 
-    //     m['a'] = 10;
-    //     m['b'] = 20;
-    //     m['c'] = 30;
-    //     m['d'] = 40;
-    //     m['e'] = 50;
-    //     m['f'] = 60;
+        m['a'] = 10;
+        m['b'] = 20;
+        m['c'] = 30;
+        m['d'] = 40;
+        m['e'] = 50;
+        m['f'] = 60;
 
-    //     cond = m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-    //     it = m.find('b');
-    //     ft_it = ft_m.find('b');
+        it = m.find('b');
+        ft_it = ft_m.find('b');
 
-    //     cond = cond && (it->first == ft_it->first) && (it->second == ft_it->second);
-    //     m.erase(it);       // erasing by iterator
-    //     ft_m.erase(ft_it); // erasing by iterator
+        cond = cond && (it->first == ft_it->first) && (it->second == ft_it->second);
+        m.erase(it);       // erasing by iterator
+        ft_m.erase(ft_it); // erasing by iterator
 
-    //     cond = cond && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = cond && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-    //     int ret = m.erase('c');       // erasing by key
-    //     int ft_ret = ft_m.erase('c'); // erasing by key
+        int ret = m.erase('c');       // erasing by key
+        int ft_ret = ft_m.erase('c'); // erasing by key
 
-    //     cond = cond && ret == ft_ret && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = cond && ret == ft_ret && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-    //     it = m.find('e');
-    //     ft_it = ft_m.find('e');
+        it = m.find('e');
+        ft_it = ft_m.find('e');
 
-    //     cond = cond && (it->first == ft_it->first) && (it->second == ft_it->second) && m.size() == ft_m.size();
+        cond = cond && (it->first == ft_it->first) && (it->second == ft_it->second) && m.size() == ft_m.size();
 
-    //     m.erase(it, m.end());          // erasing by range
-    //     ft_m.erase(ft_it, ft_m.end()); // erasing by range
+        m.erase(it, m.end());          // erasing by range
+        ft_m.erase(ft_it, ft_m.end()); // erasing by range
 
-    //     cond = cond && m.empty() == ft_m.empty() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = cond && m.empty() == ft_m.empty() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-    //     /* ---------- Testing some edge cases ---------- */
+        /* ---------- Testing some edge cases ---------- */
 
-    //     std::map<int, std::string> m2;
-    //     ft::map<int, std::string> ft_m2;
+        std::map<int, std::string> m2;
+        ft::map<int, std::string> ft_m2;
 
-    //     for (size_t i = 0; i < 1e5; i++)
-    //     {
-    //         m2.insert(std::make_pair(i, "string1"));
-    //         ft_m2.insert(ft::make_pair(i, "string1"));
-    //     }
+        for (size_t i = 0; i < 1e5; i++)
+        {
+            m2.insert(std::make_pair(i, "string1"));
+            ft_m2.insert(ft::make_pair(i, "string1"));
+        }
 
-    //     std::map<int, std::string>::reverse_iterator it2 = m2.rbegin();
-    //     ft::map<int, std::string>::reverse_iterator ft_it2 = ft_m2.rbegin();
+        std::map<int, std::string>::reverse_iterator it2 = m2.rbegin();
+        ft::map<int, std::string>::reverse_iterator ft_it2 = ft_m2.rbegin();
 
-    //     m2.erase(m2.begin());
-    //     ft_m2.erase(ft_m2.begin());
+        m2.erase(m2.begin());
+        ft_m2.erase(ft_m2.begin());
 
-    //     cond = cond && m2.size() == ft_m2.size() && compareMaps(m2.begin(), m2.end(), ft_m2.begin(), ft_m2.end());
+        cond = cond && m2.size() == ft_m2.size() && compareMaps(m2.begin(), m2.end(), ft_m2.begin(), ft_m2.end());
 
-    //     m2.erase(it2->first);
-    //     ft_m2.erase(ft_it2->first);
+        m2.erase(it2->first);
+        ft_m2.erase(ft_it2->first);
 
-    //     cond = cond && m2.size() == ft_m2.size() && compareMaps(m2.begin(), m2.end(), ft_m2.begin(), ft_m2.end());
+        cond = cond && m2.size() == ft_m2.size() && compareMaps(m2.begin(), m2.end(), ft_m2.begin(), ft_m2.end());
 
-    //     std::map<int, std::string> m3;
-    //     ft::map<int, std::string> ft_m3;
-    //     std::vector<int> vec;
-    //     std::vector<int> ft_vec;
-    //     std::random_device randDev;
-    //     std::mt19937 generator(randDev());
-    //     std::uniform_int_distribution<int> distr(0, 1e8);
+        std::map<int, std::string> m3;
+        ft::map<int, std::string> ft_m3;
+        std::vector<int> vec;
+        std::vector<int> ft_vec;
+        std::random_device randDev;
+        std::mt19937 generator(randDev());
+        std::uniform_int_distribution<int> distr(0, 1e8);
 
-    //     for (size_t i = 0; i < 1e6; i++)
-    //     {
-    //         m3.insert(std::make_pair(i, "string1"));
-    //         ft_m3.insert(ft::make_pair(i, "string1"));
-    //     }
+        for (size_t i = 0; i < 1e6; i++)
+        {
+            m3.insert(std::make_pair(i, "string1"));
+            ft_m3.insert(ft::make_pair(i, "string1"));
+        }
 
-    //     for (size_t i = 0; i < 1e6; ++i)
-    //     {
-    //         int n = distr(generator);
-    //         int ret1 = m3.erase(n);
-    //         int ret2 = ft_m3.erase(n);
+        for (size_t i = 0; i < 1e6; ++i)
+        {
+            int n = distr(generator);
+            int ret1 = m3.erase(n);
+            int ret2 = ft_m3.erase(n);
 
-    //         if (ret1 != ret2)
-    //         {
-    //             cond = false;
-    //             break;
-    //         }
-    //     }
+            if (ret1 != ret2)
+            {
+                cond = false;
+                break;
+            }
+        }
 
-    //     if (!m3.empty())
-    //     {
-    //         m3.erase(m3.begin(), m3.end());
-    //         m3.erase(m3.begin(), m3.end());
-    //     }
-    //     if (!ft_m3.empty())
-    //     {
-    //         ft_m3.erase(ft_m3.begin(), ft_m3.end());
-    //         ft_m3.erase(ft_m3.begin(), ft_m3.end());
-    //     }
-    //     cond = cond && (m3.size() == ft_m3.size() && compareMaps(m3.begin(), m3.end(), ft_m3.begin(), ft_m3.end()));
+        if (!m3.empty())
+        {
+            m3.erase(m3.begin(), m3.end());
+            m3.erase(m3.begin(), m3.end());
+        }
+        if (!ft_m3.empty())
+        {
+            ft_m3.erase(ft_m3.begin(), ft_m3.end());
+            ft_m3.erase(ft_m3.begin(), ft_m3.end());
+        }
+        cond = cond && (m3.size() == ft_m3.size() && compareMaps(m3.begin(), m3.end(), ft_m3.begin(), ft_m3.end()));
 
-    //     EQUAL(cond);
-    // }
+        EQUAL(cond);
+    }
 
     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " swap method "
               << "] --------------------]\t\t\033[0m";
 
-    // {
-    //     bool cond = false;
-    //     std::map<char, int> foo, bar;
-    //     ft::map<char, int> ft_foo, ft_bar;
+    {
+        bool cond = false;
+        std::map<char, int> foo, bar;
+        ft::map<char, int> ft_foo, ft_bar;
 
-    //     foo['x'] = 100;
-    //     foo['y'] = 200;
+        foo['x'] = 100;
+        foo['y'] = 200;
 
-    //     ft_foo['x'] = 100;
-    //     ft_foo['y'] = 200;
+        ft_foo['x'] = 100;
+        ft_foo['y'] = 200;
 
-    //     cond = foo.size() == ft_foo.size() && bar.size() == ft_bar.size();
+        cond = foo.size() == ft_foo.size() && bar.size() == ft_bar.size();
 
-    //     bar['a'] = 11;
-    //     bar['b'] = 22;
-    //     bar['c'] = 33;
+        bar['a'] = 11;
+        bar['b'] = 22;
+        bar['c'] = 33;
 
-    //     ft_bar['a'] = 11;
-    //     ft_bar['b'] = 22;
-    //     ft_bar['c'] = 33;
+        ft_bar['a'] = 11;
+        ft_bar['b'] = 22;
+        ft_bar['c'] = 33;
 
-    //     cond = cond && foo.size() == ft_foo.size() && bar.size() == ft_bar.size() && compareMaps(foo.begin(), foo.end(), ft_foo.begin(), ft_foo.end()) && compareMaps(bar.begin(), bar.end(), ft_bar.begin(), ft_bar.end());
+        cond = cond && foo.size() == ft_foo.size() && bar.size() == ft_bar.size() && compareMaps(foo.begin(), foo.end(), ft_foo.begin(), ft_foo.end()) && compareMaps(bar.begin(), bar.end(), ft_bar.begin(), ft_bar.end());
 
-    //     foo.swap(bar);
-    //     ft_foo.swap(ft_bar);
+        foo.swap(bar);
+        ft_foo.swap(ft_bar);
 
-    //     cond = cond && foo.size() == ft_foo.size() && bar.size() == ft_bar.size() && compareMaps(foo.begin(), foo.end(), ft_foo.begin(), ft_foo.end()) && compareMaps(bar.begin(), bar.end(), ft_bar.begin(), ft_bar.end());
+        cond = cond && foo.size() == ft_foo.size() && bar.size() == ft_bar.size() && compareMaps(foo.begin(), foo.end(), ft_foo.begin(), ft_foo.end()) && compareMaps(bar.begin(), bar.end(), ft_bar.begin(), ft_bar.end());
 
-    //     std::map<std::string, std::string, std::greater<std::string> > m1, m2;
-    //     ft::map<std::string, std::string, std::greater<std::string> > ft_m1, ft_m2;
+        std::map<std::string, std::string, std::greater<std::string> > m1, m2;
+        ft::map<std::string, std::string, std::greater<std::string> > ft_m1, ft_m2;
 
-    //     m1["γ"] = "gamma";
-    //     m1["β"] = "beta";
-    //     m1["α"] = "alpha";
-    //     m1["γ"] = "gamma";
+        m1["γ"] = "gamma";
+        m1["β"] = "beta";
+        m1["α"] = "alpha";
+        m1["γ"] = "gamma";
 
-    //     m2["ε"] = "eplsilon";
-    //     m2["δ"] = "delta";
-    //     m2["ε"] = "epsilon";
+        m2["ε"] = "eplsilon";
+        m2["δ"] = "delta";
+        m2["ε"] = "epsilon";
 
-    //     ft_m1["γ"] = "gamma";
-    //     ft_m1["β"] = "beta";
-    //     ft_m1["α"] = "alpha";
-    //     ft_m1["γ"] = "gamma";
+        ft_m1["γ"] = "gamma";
+        ft_m1["β"] = "beta";
+        ft_m1["α"] = "alpha";
+        ft_m1["γ"] = "gamma";
 
-    //     ft_m2["ε"] = "eplsilon";
-    //     ft_m2["δ"] = "delta";
-    //     ft_m2["ε"] = "epsilon";
+        ft_m2["ε"] = "eplsilon";
+        ft_m2["δ"] = "delta";
+        ft_m2["ε"] = "epsilon";
 
-    //     const std::pair<std::string, std::string> &ref = *(m1.begin());
-    //     const std::map<std::string, std::string, std::greater<std::string> >::iterator iter = std::next(m1.begin());
-    //     const ft::pair<std::string, std::string> &ft_ref = *(ft_m1.begin());
-    //     const ft::map<std::string, std::string, std::greater<std::string> >::iterator ft_iter = std::next(ft_m1.begin());
+        const std::pair<std::string, std::string> &ref = *(m1.begin());
+        const std::map<std::string, std::string, std::greater<std::string> >::iterator iter = std::next(m1.begin());
+        const ft::pair<std::string, std::string> &ft_ref = *(ft_m1.begin());
+        const ft::map<std::string, std::string, std::greater<std::string> >::iterator ft_iter = std::next(ft_m1.begin());
 
-    //     // std::cout << "──────── before swap ────────\n"
-    //     //           << "m1: " << m1 << "m2: " << m2 << "ref: " << ref
-    //     //           << "\niter: " << *iter << '\n';
+        // std::cout << "──────── before swap ────────\n"
+        //           << "m1: " << m1 << "m2: " << m2 << "ref: " << ref
+        //           << "\niter: " << *iter << '\n';
 
-    //     cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
+        cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
 
-    //     m1.swap(m2);
-    //     ft_m1.swap(ft_m2);
+        m1.swap(m2);
+        ft_m1.swap(ft_m2);
 
-    //     // _---------------_ << ──────── after swap ──────── >> _---------------_
+        // _---------------_ << ──────── after swap ──────── >> _---------------_
 
-    //     cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
+        cond = cond && ref.first == ft_ref.first && ref.second == ft_ref.second && iter->second == ft_iter->second && iter->first == ft_iter->first && m1.size() == ft_m1.size() && m2.size() && ft_m2.size();
 
-    //     EQUAL(cond);
-    // }
-    // std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " clear method "
-    //           << "] --------------------]\t\t\033[0m";
+        EQUAL(cond);
+    }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " clear method "
+              << "] --------------------]\t\t\033[0m";
 
-    // {
-    //     bool cond(false);
-    //     std::map<char, int> m;
-    //     ft::map<char, int> ft_m;
+    {
+        bool cond(false);
+        std::map<char, int> m;
+        ft::map<char, int> ft_m;
 
-    //     m['x'] = 100;
-    //     m['y'] = 200;
-    //     m['z'] = 300;
+        m['x'] = 100;
+        m['y'] = 200;
+        m['z'] = 300;
 
-    //     ft_m['x'] = 100;
-    //     ft_m['y'] = 200;
-    //     ft_m['z'] = 300;
+        ft_m['x'] = 100;
+        ft_m['y'] = 200;
+        ft_m['z'] = 300;
 
-    //     cond = m.size() == ft_m.size();
+        cond = m.size() == ft_m.size();
 
-    //     m.clear();
-    //     ft_m.clear();
+        m.clear();
+        ft_m.clear();
 
-    //     cond = cond && m.empty() == ft_m.empty() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = cond && m.empty() == ft_m.empty() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-    //     m['a'] = 1101;
-    //     m['b'] = 2202;
-    //     ft_m['a'] = 1101;
-    //     ft_m['b'] = 2202;
+        m['a'] = 1101;
+        m['b'] = 2202;
+        ft_m['a'] = 1101;
+        ft_m['b'] = 2202;
 
-    //     cond = cond && m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = cond && m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-    //     m = std::map<char, int>();
-    //     ft_m = ft::map<char, int>();
+        m = std::map<char, int>();
+        ft_m = ft::map<char, int>();
 
-    //     m.clear();
-    //     ft_m.clear();
+        m.clear();
+        ft_m.clear();
 
-    //     cond = cond && m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = cond && m.size() == ft_m.size() && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-    //     EQUAL(cond);
-    // }
+        EQUAL(cond);
+    }
 }
 
 struct ModCmp
@@ -1093,377 +1087,377 @@ struct ModCmp
     }
 };
 
-// void testObservers()
-// {
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " key_comp method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         bool cond(true);
-//         std::map<int, int> m;
-//         ft::map<int, int> ft_m;
-//         std::map<int, int>::key_compare comp = m.key_comp();
-//         ft::map<int, int>::key_compare mycomp = ft_m.key_comp();
+void testObservers()
+{
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " key_comp method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        bool cond(true);
+        std::map<int, int> m;
+        ft::map<int, int> ft_m;
+        std::map<int, int>::key_compare comp = m.key_comp();
+        ft::map<int, int>::key_compare mycomp = ft_m.key_comp();
 
-//         for (size_t i = 0; i < 1e2; i++)
-//         {
-//             m.insert(std::make_pair(i, -1));
-//             ft_m.insert(ft::make_pair(i, -1));
-//         }
+        for (size_t i = 0; i < 1e2; i++)
+        {
+            m.insert(std::make_pair(i, -1));
+            ft_m.insert(ft::make_pair(i, -1));
+        }
 
-//         int highest = m.rbegin()->first;       // key value of last element
-//         int ft_highest = ft_m.rbegin()->first; // key value of last element
+        int highest = m.rbegin()->first;       // key value of last element
+        int ft_highest = ft_m.rbegin()->first; // key value of last element
 
-//         std::map<int, int>::iterator it = m.begin();
-//         ft::map<int, int>::iterator ft_it = ft_m.begin();
-//         do
-//         {
-//             if (!(it->first == ft_it->first && it->second == ft_it->second))
-//             {
-//                 cond = false;
-//                 break;
-//             }
+        std::map<int, int>::iterator it = m.begin();
+        ft::map<int, int>::iterator ft_it = ft_m.begin();
+        do
+        {
+            if (!(it->first == ft_it->first && it->second == ft_it->second))
+            {
+                cond = false;
+                break;
+            }
 
-//         } while (comp((*it++).first, highest) && mycomp((*ft_it++).first, ft_highest));
-//         EQUAL(cond);
-//     }
+        } while (comp((*it++).first, highest) && mycomp((*ft_it++).first, ft_highest));
+        EQUAL(cond);
+    }
 
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " value_comp method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         int sum(0);
-//         int s_key(0);
-//         ft::map<char, int> mymap;
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " value_comp method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        int sum(0);
+        int s_key(0);
+        ft::map<char, int> mymap;
 
-//         mymap['x'] = 1001;
-//         mymap['y'] = 2002;
-//         mymap['z'] = 3003;
+        mymap['x'] = 1001;
+        mymap['y'] = 2002;
+        mymap['z'] = 3003;
 
-//         ft::pair<char, int> highest = *mymap.rbegin(); // last element
+        ft::pair<char, int> highest = *mymap.rbegin(); // last element
 
-//         ft::map<char, int>::iterator it = mymap.begin();
-//         do
-//         {
-//             sum += it->second;
-//             s_key += it->first;
-//         } while (mymap.value_comp()(*it++, highest));
+        ft::map<char, int>::iterator it = mymap.begin();
+        do
+        {
+            sum += it->second;
+            s_key += it->first;
+        } while (mymap.value_comp()(*it++, highest));
 
-//         EQUAL(sum == 6006 && s_key == 363);
-//     }
-// }
-// void testNonMemberSwap()
-// {
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " non-member swap method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         int res(0), ft_res(0), key_res(0), ft_key_res(0);
-//         ft::map<char, int> foo, bar;
+        EQUAL(sum == 6006 && s_key == 363);
+    }
+}
+void testNonMemberSwap()
+{
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " non-member swap method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        int res(0), ft_res(0), key_res(0), ft_key_res(0);
+        ft::map<char, int> foo, bar;
 
-//         foo['x'] = 100;
-//         foo['y'] = 200;
+        foo['x'] = 100;
+        foo['y'] = 200;
 
-//         bar['a'] = 11;
-//         bar['b'] = 22;
-//         bar['c'] = 33;
+        bar['a'] = 11;
+        bar['b'] = 22;
+        bar['c'] = 33;
 
-//         swap(foo, bar);
+        swap(foo, bar);
 
-//         for (ft::map<char, int>::iterator it = foo.begin(); it != foo.end(); ++it)
-//         {
-//             res += it->second;
-//             key_res += it->first;
-//         }
+        for (ft::map<char, int>::iterator it = foo.begin(); it != foo.end(); ++it)
+        {
+            res += it->second;
+            key_res += it->first;
+        }
 
-//         for (ft::map<char, int>::iterator it = bar.begin(); it != bar.end(); ++it)
-//         {
-//             ft_res += it->second;
-//             ft_key_res += it->first;
-//         }
-//         EQUAL((res == 66) && (ft_res = 300) && (key_res == ('a' + 'b' + 'c')) && (ft_key_res == ('x' + 'y')));
-//     }
-// }
+        for (ft::map<char, int>::iterator it = bar.begin(); it != bar.end(); ++it)
+        {
+            ft_res += it->second;
+            ft_key_res += it->first;
+        }
+        EQUAL((res == 66) && (ft_res = 300) && (key_res == ('a' + 'b' + 'c')) && (ft_key_res == ('x' + 'y')));
+    }
+}
 
-// void testOperations()
-// {
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " find method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         bool cond(true);
+void testOperations()
+{
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " find method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        bool cond(true);
 
-//         std::vector<int> vec;
-//         std::vector<int> ft_vec;
-//         std::random_device randDev;
-//         std::mt19937 generator(randDev());
-//         std::uniform_int_distribution<int> distr(0, 1e8);
+        std::vector<int> vec;
+        std::vector<int> ft_vec;
+        std::random_device randDev;
+        std::mt19937 generator(randDev());
+        std::uniform_int_distribution<int> distr(0, 1e8);
 
-//         std::map<int, std::string> m1;
-//         ft::map<int, std::string> ft_m1;
-//         std::map<int, std::string>::iterator it;
-//         ft::map<int, std::string>::iterator ft_it;
+        std::map<int, std::string> m1;
+        ft::map<int, std::string> ft_m1;
+        std::map<int, std::string>::iterator it;
+        ft::map<int, std::string>::iterator ft_it;
 
-//         for (size_t i = 0; i < 1e6; i++)
-//         {
-//             m1.insert(std::make_pair(i, "string2"));
-//             ft_m1.insert(ft::make_pair(i, "string2"));
-//         }
+        for (size_t i = 0; i < 1e6; i++)
+        {
+            m1.insert(std::make_pair(i, "string2"));
+            ft_m1.insert(ft::make_pair(i, "string2"));
+        }
 
-//         for (size_t i = 0; i < 1e6; i++)
-//         {
-//             int n = distr(generator);
-//             it = m1.find(n);
-//             ft_it = ft_m1.find(n);
-//             if (it == m1.end() && ft_it == ft_m1.end())
-//                 continue;
-//             if (it == m1.end() && ft_it != ft_m1.end())
-//             {
-//                 cond = false;
-//                 break;
-//             }
-//             else
-//             {
-//                 vec.push_back(it->first);
-//                 ft_vec.push_back(ft_it->first);
-//             }
-//         }
+        for (size_t i = 0; i < 1e6; i++)
+        {
+            int n = distr(generator);
+            it = m1.find(n);
+            ft_it = ft_m1.find(n);
+            if (it == m1.end() && ft_it == ft_m1.end())
+                continue;
+            if (it == m1.end() && ft_it != ft_m1.end())
+            {
+                cond = false;
+                break;
+            }
+            else
+            {
+                vec.push_back(it->first);
+                ft_vec.push_back(ft_it->first);
+            }
+        }
 
-//         std::map<char, int> m;
-//         ft::map<char, int> ft_m;
-//         std::map<char, int>::iterator it2;
-//         ft::map<char, int>::iterator ft_it2;
+        std::map<char, int> m;
+        ft::map<char, int> ft_m;
+        std::map<char, int>::iterator it2;
+        ft::map<char, int>::iterator ft_it2;
 
-//         m['a'] = 50;
-//         m['b'] = 100;
-//         m['c'] = 150;
-//         m['d'] = 200;
+        m['a'] = 50;
+        m['b'] = 100;
+        m['c'] = 150;
+        m['d'] = 200;
 
-//         ft_m['a'] = 50;
-//         ft_m['b'] = 100;
-//         ft_m['c'] = 150;
-//         ft_m['d'] = 200;
+        ft_m['a'] = 50;
+        ft_m['b'] = 100;
+        ft_m['c'] = 150;
+        ft_m['d'] = 200;
 
-//         it2 = m.find('b');
-//         ft_it2 = ft_m.find('b');
+        it2 = m.find('b');
+        ft_it2 = ft_m.find('b');
 
-//         cond = cond && it2->first == ft_it2->first && it2->second == ft_it2->second;
+        cond = cond && it2->first == ft_it2->first && it2->second == ft_it2->second;
 
-//         if (it2 != m.end())
-//             m.erase(it2);
-//         if (ft_it2 != ft_m.end())
-//             ft_m.erase(ft_it2);
+        if (it2 != m.end())
+            m.erase(it2);
+        if (ft_it2 != ft_m.end())
+            ft_m.erase(ft_it2);
 
-//         cond = cond && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
+        cond = cond && compareMaps(m.begin(), m.end(), ft_m.begin(), ft_m.end());
 
-//         EQUAL(cond && vec == ft_vec);
-//     }
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " count method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         bool cond;
-//         /*---------------------------------- time limit test --------------------------------------------*/
-//         std::map<int, std::string> m;
-//         ft::map<int, std::string> ft_m;
-//         int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
-//         for (size_t i = 0; i < 9; ++i)
-//         {
-//             m.insert(std::make_pair(arr[i], "value"));
-//             ft_m.insert(ft::make_pair(arr[i], "value"));
-//         }
-//         cond = ((m.count(65) == ft_m.count(65) && m.count(300) == ft_m.count(300)));
-//         EQUAL(cond);
-//     }
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " lower_bound method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         bool cond;
-//         /*---------------------------------- time limit test --------------------------------------------*/
-//         std::map<int, std::string> m;
-//         ft::map<int, std::string> ft_m;
-//         int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
-//         for (size_t i = 0; i < 9; ++i)
-//         {
-//             m.insert(std::make_pair(arr[i], "value"));
-//             ft_m.insert(ft::make_pair(arr[i], "value"));
-//         }
-//         std::map<int, std::string> const c_m(m.begin(), m.end());
-//         ft::map<int, std::string> const c_ft_m(ft_m.begin(), ft_m.end());
-//         cond = ((m.lower_bound(15)->first == ft_m.lower_bound(15)->first));
-//         cond = (cond && (m.lower_bound(65)->first == ft_m.lower_bound(65)->first));
-//         cond = (cond && (m.lower_bound(63)->first == ft_m.lower_bound(63)->first));
-//         cond = (cond && (m.lower_bound(120)->first == ft_m.lower_bound(120)->first));
-//         cond = (cond && (m.lower_bound(70)->first == ft_m.lower_bound(70)->first));
+        EQUAL(cond && vec == ft_vec);
+    }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " count method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        bool cond;
+        /*---------------------------------- time limit test --------------------------------------------*/
+        std::map<int, std::string> m;
+        ft::map<int, std::string> ft_m;
+        int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
+        for (size_t i = 0; i < 9; ++i)
+        {
+            m.insert(std::make_pair(arr[i], "value"));
+            ft_m.insert(ft::make_pair(arr[i], "value"));
+        }
+        cond = ((m.count(65) == ft_m.count(65) && m.count(300) == ft_m.count(300)));
+        EQUAL(cond);
+    }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " lower_bound method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        bool cond;
+        /*---------------------------------- time limit test --------------------------------------------*/
+        std::map<int, std::string> m;
+        ft::map<int, std::string> ft_m;
+        int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
+        for (size_t i = 0; i < 9; ++i)
+        {
+            m.insert(std::make_pair(arr[i], "value"));
+            ft_m.insert(ft::make_pair(arr[i], "value"));
+        }
+        std::map<int, std::string> const c_m(m.begin(), m.end());
+        ft::map<int, std::string> const c_ft_m(ft_m.begin(), ft_m.end());
+        cond = ((m.lower_bound(15)->first == ft_m.lower_bound(15)->first));
+        cond = (cond && (m.lower_bound(65)->first == ft_m.lower_bound(65)->first));
+        cond = (cond && (m.lower_bound(63)->first == ft_m.lower_bound(63)->first));
+        cond = (cond && (m.lower_bound(120)->first == ft_m.lower_bound(120)->first));
+        cond = (cond && (m.lower_bound(70)->first == ft_m.lower_bound(70)->first));
 
-//         cond = (cond && (c_m.lower_bound(15)->first == c_ft_m.lower_bound(15)->first));
-//         cond = (cond && (c_m.lower_bound(65)->first == c_ft_m.lower_bound(65)->first));
-//         cond = (cond && (c_m.lower_bound(63)->first == c_ft_m.lower_bound(63)->first));
-//         cond = (cond && (c_m.lower_bound(120)->first == c_ft_m.lower_bound(120)->first));
-//         cond = (cond && (c_m.lower_bound(70)->first == c_ft_m.lower_bound(70)->first));
-//         EQUAL(cond);
-//     }
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " upper_bound method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         bool cond;
-//         /*---------------------------------- time limit test --------------------------------------------*/
-//         std::map<int, std::string> m;
-//         ft::map<int, std::string> ft_m;
-//         int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
-//         for (size_t i = 0; i < 9; ++i)
-//         {
-//             m.insert(std::make_pair(arr[i], "value"));
-//             ft_m.insert(ft::make_pair(arr[i], "value"));
-//         }
-//         std::map<int, std::string> const c_m(m.begin(), m.end());
-//         ft::map<int, std::string> const c_ft_m(ft_m.begin(), ft_m.end());
-//         cond = ((m.upper_bound(15)->first == ft_m.upper_bound(15)->first));
-//         cond = (cond && (m.upper_bound(65)->first == ft_m.upper_bound(65)->first));
-//         cond = (cond && (m.upper_bound(63)->first == ft_m.upper_bound(63)->first));
-//         cond = (cond && (m.upper_bound(120)->first == ft_m.upper_bound(120)->first));
-//         cond = (cond && (m.upper_bound(70)->first == ft_m.upper_bound(70)->first));
-//         cond = (cond && (m.upper_bound(150)->first == ft_m.upper_bound(150)->first));
+        cond = (cond && (c_m.lower_bound(15)->first == c_ft_m.lower_bound(15)->first));
+        cond = (cond && (c_m.lower_bound(65)->first == c_ft_m.lower_bound(65)->first));
+        cond = (cond && (c_m.lower_bound(63)->first == c_ft_m.lower_bound(63)->first));
+        cond = (cond && (c_m.lower_bound(120)->first == c_ft_m.lower_bound(120)->first));
+        cond = (cond && (c_m.lower_bound(70)->first == c_ft_m.lower_bound(70)->first));
+        EQUAL(cond);
+    }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " upper_bound method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        bool cond;
+        /*---------------------------------- time limit test --------------------------------------------*/
+        std::map<int, std::string> m;
+        ft::map<int, std::string> ft_m;
+        int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
+        for (size_t i = 0; i < 9; ++i)
+        {
+            m.insert(std::make_pair(arr[i], "value"));
+            ft_m.insert(ft::make_pair(arr[i], "value"));
+        }
+        std::map<int, std::string> const c_m(m.begin(), m.end());
+        ft::map<int, std::string> const c_ft_m(ft_m.begin(), ft_m.end());
+        cond = ((m.upper_bound(15)->first == ft_m.upper_bound(15)->first));
+        cond = (cond && (m.upper_bound(65)->first == ft_m.upper_bound(65)->first));
+        cond = (cond && (m.upper_bound(63)->first == ft_m.upper_bound(63)->first));
+        cond = (cond && (m.upper_bound(120)->first == ft_m.upper_bound(120)->first));
+        cond = (cond && (m.upper_bound(70)->first == ft_m.upper_bound(70)->first));
+        cond = (cond && (m.upper_bound(150)->first == ft_m.upper_bound(150)->first));
 
-//         cond = (cond && (c_m.upper_bound(15)->first == c_ft_m.upper_bound(15)->first));
-//         cond = (cond && (c_m.upper_bound(65)->first == c_ft_m.upper_bound(65)->first));
-//         cond = (cond && (c_m.upper_bound(63)->first == c_ft_m.upper_bound(63)->first));
-//         cond = (cond && (c_m.upper_bound(120)->first == c_ft_m.upper_bound(120)->first));
-//         cond = (cond && (c_m.upper_bound(70)->first == c_ft_m.upper_bound(70)->first));
-//         cond = (cond && (c_m.upper_bound(150)->first == c_ft_m.upper_bound(150)->first));
-//         EQUAL(cond);
-//     }
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " equal_range method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         bool cond;
-//         iter_def res;
-//         ft_iter_def ft_res;
-//         const_iter_def c_res;
-//         ft_const_iter_def ft_c_res;
-//         std::map<int, std::string> m;
-//         ft::map<int, std::string> ft_m;
-//         int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
-//         for (size_t i = 0; i < 9; ++i)
-//         {
-//             m.insert(std::make_pair(arr[i], "value"));
-//             ft_m.insert(ft::make_pair(arr[i], "value"));
-//         }
-//         std::map<int, std::string> const c_m(m.begin(), m.end());
-//         ft::map<int, std::string> const c_ft_m(ft_m.begin(), ft_m.end());
+        cond = (cond && (c_m.upper_bound(15)->first == c_ft_m.upper_bound(15)->first));
+        cond = (cond && (c_m.upper_bound(65)->first == c_ft_m.upper_bound(65)->first));
+        cond = (cond && (c_m.upper_bound(63)->first == c_ft_m.upper_bound(63)->first));
+        cond = (cond && (c_m.upper_bound(120)->first == c_ft_m.upper_bound(120)->first));
+        cond = (cond && (c_m.upper_bound(70)->first == c_ft_m.upper_bound(70)->first));
+        cond = (cond && (c_m.upper_bound(150)->first == c_ft_m.upper_bound(150)->first));
+        EQUAL(cond);
+    }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " equal_range method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        bool cond;
+        iter_def res;
+        ft_iter_def ft_res;
+        const_iter_def c_res;
+        ft_const_iter_def ft_c_res;
+        std::map<int, std::string> m;
+        ft::map<int, std::string> ft_m;
+        int arr[] = {20, 10, 100, 15, 60, 90, 65, 200, 150}; // size = 9
+        for (size_t i = 0; i < 9; ++i)
+        {
+            m.insert(std::make_pair(arr[i], "value"));
+            ft_m.insert(ft::make_pair(arr[i], "value"));
+        }
+        std::map<int, std::string> const c_m(m.begin(), m.end());
+        ft::map<int, std::string> const c_ft_m(ft_m.begin(), ft_m.end());
 
-//         res = m.equal_range(15);
-//         ft_res = ft_m.equal_range(15);
-//         cond = ((ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
-//         res = m.equal_range(65);
-//         ft_res = ft_m.equal_range(65);
-//         cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
-//         res = m.equal_range(63);
-//         ft_res = ft_m.equal_range(63);
-//         cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
-//         res = m.equal_range(120);
-//         ft_res = ft_m.equal_range(120);
-//         cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
-//         res = m.equal_range(70);
-//         ft_res = ft_m.equal_range(70);
-//         cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
-//         res = m.equal_range(150);
-//         ft_res = ft_m.equal_range(150);
-//         cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
+        res = m.equal_range(15);
+        ft_res = ft_m.equal_range(15);
+        cond = ((ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
+        res = m.equal_range(65);
+        ft_res = ft_m.equal_range(65);
+        cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
+        res = m.equal_range(63);
+        ft_res = ft_m.equal_range(63);
+        cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
+        res = m.equal_range(120);
+        ft_res = ft_m.equal_range(120);
+        cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
+        res = m.equal_range(70);
+        ft_res = ft_m.equal_range(70);
+        cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
+        res = m.equal_range(150);
+        ft_res = ft_m.equal_range(150);
+        cond = (cond && (ft_res.first->first == res.first->first) && (ft_res.second->first == res.second->first));
 
-//         c_res = c_m.equal_range(15);
-//         ft_c_res = c_ft_m.equal_range(15);
-//         cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
-//         c_res = c_m.equal_range(65);
-//         ft_c_res = c_ft_m.equal_range(65);
-//         cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
-//         c_res = c_m.equal_range(63);
-//         ft_c_res = c_ft_m.equal_range(63);
-//         cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
-//         c_res = c_m.equal_range(120);
-//         ft_c_res = c_ft_m.equal_range(120);
-//         cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
-//         c_res = c_m.equal_range(70);
-//         ft_c_res = c_ft_m.equal_range(70);
-//         cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
-//         c_res = c_m.equal_range(150);
-//         ft_c_res = c_ft_m.equal_range(150);
-//         cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
-//         EQUAL(cond);
-//     }
-// }
+        c_res = c_m.equal_range(15);
+        ft_c_res = c_ft_m.equal_range(15);
+        cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
+        c_res = c_m.equal_range(65);
+        ft_c_res = c_ft_m.equal_range(65);
+        cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
+        c_res = c_m.equal_range(63);
+        ft_c_res = c_ft_m.equal_range(63);
+        cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
+        c_res = c_m.equal_range(120);
+        ft_c_res = c_ft_m.equal_range(120);
+        cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
+        c_res = c_m.equal_range(70);
+        ft_c_res = c_ft_m.equal_range(70);
+        cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
+        c_res = c_m.equal_range(150);
+        ft_c_res = c_ft_m.equal_range(150);
+        cond = (cond && (ft_c_res.first->first == c_res.first->first) && (ft_c_res.second->first == c_res.second->first));
+        EQUAL(cond);
+    }
+}
 
-// void testAllocatorMethodes()
-// {
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " get_allocator method "
-//               << "] --------------------]\t\t\033[0m";
-//     {
-//         int psize;
-//         ft::map<char, int> mymap;
-//         ft::pair<const char, int> *p;
+void testAllocatorMethodes()
+{
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " get_allocator method "
+              << "] --------------------]\t\t\033[0m";
+    {
+        int psize;
+        ft::map<char, int> mymap;
+        ft::pair<const char, int> *p;
 
-//         // allocate an array of 5 elements using mymap's allocator:
-//         p = mymap.get_allocator().allocate(5);
+        // allocate an array of 5 elements using mymap's allocator:
+        p = mymap.get_allocator().allocate(5);
 
-//         psize = sizeof(std::map<char, int>::value_type) * 5;
-//         EQUAL(psize == 40);
-//         mymap.get_allocator().deallocate(p, 5);
-//     }
-// }
-// void testRetionalOperators()
-// {
+        psize = sizeof(std::map<char, int>::value_type) * 5;
+        EQUAL(psize == 40);
+        mymap.get_allocator().deallocate(p, 5);
+    }
+}
+void testRetionalOperators()
+{
 
-//     /* ---------------  pretty simple tests --------------- */
-//     std::map<char, int> foo, bar;
-//     ft::map<char, int> ft_foo, ft_bar;
-//     foo['a'] = 100;
-//     foo['b'] = 200;
-//     bar['a'] = 10;
-//     bar['z'] = 1000;
+    /* ---------------  pretty simple tests --------------- */
+    std::map<char, int> foo, bar;
+    ft::map<char, int> ft_foo, ft_bar;
+    foo['a'] = 100;
+    foo['b'] = 200;
+    bar['a'] = 10;
+    bar['z'] = 1000;
 
-//     ft_foo['a'] = 100;
-//     ft_foo['b'] = 200;
-//     ft_bar['a'] = 10;
-//     ft_bar['z'] = 1000;
+    ft_foo['a'] = 100;
+    ft_foo['b'] = 200;
+    ft_bar['a'] = 10;
+    ft_bar['z'] = 1000;
 
-//     std::map<int, std::string> m, m1;
-//     ft::map<int, std::string> ft_m, ft_m1;
-//     for (size_t i = 0; i < 1e6; ++i)
-//     {
-//         m.insert(std::make_pair(i, "value"));
-//         ft_m.insert(ft::make_pair(i, "value"));
-//     }
-//     for (size_t i = 0; i < 1e6; ++i)
-//     {
-//         m1.insert(std::make_pair(i + 1, "value1"));
-//         ft_m1.insert(ft::make_pair(i + 1, "value1"));
-//     }
+    std::map<int, std::string> m, m1;
+    ft::map<int, std::string> ft_m, ft_m1;
+    for (size_t i = 0; i < 1e6; ++i)
+    {
+        m.insert(std::make_pair(i, "value"));
+        ft_m.insert(ft::make_pair(i, "value"));
+    }
+    for (size_t i = 0; i < 1e6; ++i)
+    {
+        m1.insert(std::make_pair(i + 1, "value1"));
+        ft_m1.insert(ft::make_pair(i + 1, "value1"));
+    }
 
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator == "
-//               << "] --------------------]\t\t\033[0m";
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator == "
+              << "] --------------------]\t\t\033[0m";
 
-//     EQUAL(((foo == bar) == (ft_foo == ft_bar)));
+    EQUAL(((foo == bar) == (ft_foo == ft_bar)));
 
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator != "
-//               << "] --------------------]\t\t\033[0m";
-//     /*---------------------------------- time limit test --------------------------------------------*/
-//     EQUAL((foo != bar) == (ft_foo != ft_bar));
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator != "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    EQUAL((foo != bar) == (ft_foo != ft_bar));
 
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator > "
-//               << "] --------------------]\t\t\033[0m";
-//     /*---------------------------------- time limit test --------------------------------------------*/
-//     EQUAL(((foo > bar) == (ft_foo > ft_bar)));
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator > "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    EQUAL(((foo > bar) == (ft_foo > ft_bar)));
 
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator >= "
-//               << "] --------------------]\t\t\033[0m";
-//     /*---------------------------------- time limit test --------------------------------------------*/
-//     EQUAL(((foo >= bar) == (ft_foo >= ft_bar)));
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator >= "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    EQUAL(((foo >= bar) == (ft_foo >= ft_bar)));
 
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator < "
-//               << "] --------------------]\t\t\033[0m";
-//     /*---------------------------------- time limit test --------------------------------------------*/
-//     EQUAL(((foo < bar) == (ft_foo < ft_bar)));
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator < "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    EQUAL(((foo < bar) == (ft_foo < ft_bar)));
 
-//     std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator <= "
-//               << "] --------------------]\t\t\033[0m";
-//     /*---------------------------------- time limit test --------------------------------------------*/
-//     EQUAL(((foo <= bar) == (ft_foo <= ft_bar)));
-// }
+    std::cout << "\t\033[1;37m[-------------------- [" << std::setw(40) << std::left << " operator <= "
+              << "] --------------------]\t\t\033[0m";
+    /*---------------------------------- time limit test --------------------------------------------*/
+    EQUAL(((foo <= bar) == (ft_foo <= ft_bar)));
+}
 
 void alarm_handler(int seg)
 {
@@ -1498,32 +1492,32 @@ int main()
     TEST_CASE(testCapacityMethods)
     std::cout << std::endl;
 
-    // std::cout << YELLOW << "Testing Access Element Methods; " << RESET << std::endl;
-    // TEST_CASE(testElementAccess);
-    // std::cout << std::endl;
+    std::cout << YELLOW << "Testing Access Element Methods; " << RESET << std::endl;
+    TEST_CASE(testElementAccess);
+    std::cout << std::endl;
 
     std::cout << YELLOW << "Testing Modifiers Methods;" << RESET << std::endl;
     TEST_CASE(testModifiers)
     std::cout << std::endl;
 
-    // std::cout << YELLOW << "Testing Observers Methods;" << RESET << std::endl;
-    // TEST_CASE(testObservers)
-    // std::cout << std::endl;
+    std::cout << YELLOW << "Testing Observers Methods;" << RESET << std::endl;
+    TEST_CASE(testObservers)
+    std::cout << std::endl;
 
-    // std::cout << YELLOW << "Testing Operations Methods;" << RESET << std::endl;
-    // TEST_CASE(testOperations)
-    // std::cout << std::endl;
+    std::cout << YELLOW << "Testing Operations Methods;" << RESET << std::endl;
+    TEST_CASE(testOperations)
+    std::cout << std::endl;
 
-    // std::cout << YELLOW << "Testing Allocator Methods;" << RESET << std::endl;
-    // TEST_CASE(testAllocatorMethodes)
-    // std::cout << std::endl;
+    std::cout << YELLOW << "Testing Allocator Methods;" << RESET << std::endl;
+    TEST_CASE(testAllocatorMethodes)
+    std::cout << std::endl;
 
-    // std::cout << YELLOW << "Testing Retional Operators; " << RESET << std::endl;
-    // TEST_CASE(testRetionalOperators);
-    // std::cout << std::endl;
+    std::cout << YELLOW << "Testing Retional Operators; " << RESET << std::endl;
+    TEST_CASE(testRetionalOperators);
+    std::cout << std::endl;
 
     std::cout << YELLOW << "Testing Non-Member Swap  ; " << RESET << std::endl;
-    // TEST_CASE(testNonMemberSwap);
+    TEST_CASE(testNonMemberSwap);
     std::cout << std::endl;
     system("leaks map.out");
     return 0;

@@ -73,6 +73,7 @@
         "__tree": "cpp",
         "map": "cpp",
         "__cxx_version": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "__functional_03": "cpp"
     }
 }
