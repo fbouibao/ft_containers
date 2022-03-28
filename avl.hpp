@@ -357,7 +357,7 @@ namespace ft{
             return (this->_alloc_node.max_size());
         }
 
-        Node *getsuccesor(const Node *node)
+        Node *getsuccesor(const Node *node) const
         {
 
 			if (node == NULL)
@@ -373,7 +373,7 @@ namespace ft{
 			return (nodeParent);
         }
 
-        Node *getpresuccesor(const Node *node)
+        Node *getpresuccesor(const Node *node) const
         {
 			if (node == NULL)
 				return (NULL);
@@ -413,25 +413,17 @@ namespace ft{
 
         Node* bound(const Node *node, const key &k) const
         {
-            	Node * current = (Node *)node;
-				Node * tmp_current = (Node *)node;
-				while (current)
-				{
-					// if (k < current->value->first) {
-					if (_ob_c(k, current->value->first)) {
-						tmp_current = current;
-						current = current->left;
-					}
-					// else if (k > current->value->first)
-					else if ((_ob_c(current->value->first, k)))
-						current = current->right;
-					else
-						return current;
-				}
-				return tmp_current;
+        	Node * current = min_node((Node *)node);
+			while (current)
+			{
+				if (_ob_c(k, current->value->first)) {
+                    return (current);
+                }
+				current = getsuccesor(current);
+			}
+			return this->_end_node;
         }
 
     };
-    
-    
+
 }

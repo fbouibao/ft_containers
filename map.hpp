@@ -293,35 +293,42 @@ namespace ft
 
         iterator lower_bound (const key_type& k)
         {
-			// iterator it = this->find(k);
-			// if (it == this->end())
-			// 	return (this->end());
-			return (iterator(this->_tree, this->_tree._node));
+			iterator it = this->find(k);
+			if (it != this->end())
+				return (it);
+			Node *n = this->_tree.bound(this->_tree._node, k);
+			return (iterator(this->_tree, n));
         }
 
         const_iterator lower_bound (const key_type& k) const
         {
-			return (const_iterator(this->_tree, this->_tree._node));
+			const_iterator it = this->find(k);
+			if (it != this->end())
+				return (it);
+			Node *n = this->_tree.bound(this->_tree._node, k);
+			return (const_iterator(this->_tree, n));
         }
 
         iterator upper_bound (const key_type& k)
         {
-			return (iterator(this->_tree, this->_tree._node));
+			Node *n = this->_tree.bound(this->_tree._node, k);
+			return (iterator(this->_tree, n));
         }
 
         const_iterator upper_bound (const key_type& k) const
         {
-			return (const_iterator(this->_tree, this->_tree._node));
+			Node *n = this->_tree.bound(this->_tree._node, k);
+			return (const_iterator(this->_tree, n));
         }
 
         pair<const_iterator,const_iterator> equal_range (const key_type& k) const
         {
-            return (ft::make_pair(const_iterator(), const_iterator()));
+            return (ft::make_pair(lower_bound(k), upper_bound(k)));
         }
 
-        pair<iterator,iterator>             equal_range (const key_type& k)
+        pair<iterator,iterator>	equal_range (const key_type& k)
         {
-            return (ft::make_pair(iterator(), iterator()));
+            return (ft::make_pair(lower_bound(k), upper_bound(k)));
         }
 
 		key_compare key_comp() const
