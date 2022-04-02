@@ -46,8 +46,8 @@ namespace ft{
         }
 
         ~avl()
-        {
-            // _alloc_node.deallocate(_end_node, 1);
+        {            
+            _alloc_node.deallocate(_end_node, 1);
         }
 
         Node *get_head(Node *node)
@@ -388,20 +388,7 @@ namespace ft{
 			return (nodeParent);
         }
 
-        void displayallnode()
-        {
-            Node *nd = this->min_node(this->_node);
-            std::cout << nd->value->first << " " << nd->value->second << std::endl;
-            while (nd != _end_node)
-            {
-                nd = getsuccesor(nd);
-                std::cout << nd->value->first << " " << nd->value->second << std::endl;
-                if (nd == this->max_node(this->_node))
-                    break;
-            }
-            
-            
-        }
+
 
 			ft::pair<T&, bool>			operator[] (const key& k) {
 				Node	*	tmp = this->search(this->_node, k);

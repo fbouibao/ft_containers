@@ -126,12 +126,13 @@ namespace ft
 			return (const_iterator(_tree, _tree.min_node(_tree._node)));
 		}
 
-			iterator end() {
-				return iterator(_tree, _tree._end_node);
-			}
-			const_iterator end() const {
-				return const_iterator(_tree, _tree._end_node);
-			}
+		iterator end() {
+			return iterator(_tree, _tree._end_node);
+		}
+
+		const_iterator end() const {
+			return const_iterator(_tree, _tree._end_node);
+		}
 
 	    reverse_iterator rbegin()
 		{
@@ -252,10 +253,12 @@ namespace ft
 		{
 			Tree tree;
 			size_type size_tmp;
+			Node *end_node = tree._end_node;
 
 			tree = x._tree;
 			x._tree = this->_tree;
 			this->_tree = tree;
+			tree._end_node = end_node;
 
 			size_tmp = x._size;
 			x._size = this->_size;
