@@ -13,8 +13,8 @@ namespace ft {
 			typedef typename Iterator::reference			reference;
 			typedef typename Iterator::iterator_category	iterator_category;
 	};
-	template <class T> // int *
-	struct iterator_traits<T*> { // int **
+	template <class T>
+	struct iterator_traits<T*> {
 			typedef	std::ptrdiff_t						difference_type;
 			typedef	T									value_type;
 			typedef	T*									pointer;

@@ -322,15 +322,13 @@ namespace ft{
 
         void insert (iterator position, size_type n, const value_type& val)
         {
-            size_type d = (size_type)std::distance(begin(), position);
+            difference_type d = std::distance(begin(), position);
             if (this->_capacity == 0 || (this->_size + n) > (this->_capacity * 2))
                 reserve(this->_size + n);
             else if ((this->_size + n) > this->_capacity)
                 reserve(this->_size * 2);
-            for (size_type i = this->_size - 1; i >= d; i--)
-            {
-                this->_alloc.construct(this->_array + i + n, this->_array[i]);
-            }
+			for (difference_type i = this->_size - 1;i >= d;--i)
+				this->_alloc.construct(this->_array + (i + n), this->_array[i]);
             for (size_type i = 0; i < n; i++)
             {
                 this->_alloc.construct(this->_array + d++, val);                
@@ -341,15 +339,15 @@ namespace ft{
         template <class InputIterator>
         void insert (iterator position, InputIterator first, InputIterator last)
         {
-            size_type d = (size_type)std::distance(begin(), position);
-            size_type n = (size_type)std::distance(first, last);
+            difference_type d = std::distance(begin(), position);
+            size_type n = std::distance(first, last);
 
             if (this->_capacity == 0 || (this->_size + n) > (this->_capacity * 2))
                 reserve(this->_size + n);
             else if ((this->_size + n) > this->_capacity)
                 reserve(this->_size * 2);
 
-            for (size_type i = this->_size - 1; i >= d; i--)
+            for (difference_type i = this->_size - 1; i >= d; i--)
             {
                 this->_alloc.construct(this->_array + i + n, this->_array[i]);
             }
@@ -374,17 +372,17 @@ namespace ft{
 
         iterator erase (iterator first, iterator last)
         {
-            size_type d = (size_type)std::distance(begin(), first);
-            size_type n = (size_type)std::distance(first, last);
-            for (size_type i = d; i < d + n; i++)
+            size_type d = std::distance(begin(), first);
+            size_type n = std::distance(first, last);
+            for (size_type i = d; i < n + d; i++)
             {
                 this->_alloc.destroy(this->_array + i);
             }
+            this->_size -= n;
             for (size_type i = d; i < this->_size; i++)
             {
                 this->_alloc.construct(this->_array + i, this->_array[i + n]);                
             }
-            this->_size -= n;
             return (iterator(this->_array + d));
         }
 
