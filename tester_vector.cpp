@@ -1,7 +1,7 @@
 /* ************************************************************************************************ */
 /*                                                                                                  */
 /*                                                        :::   ::::::::   ::::::::  :::::::::::    */
-/*   Vector_test.cpp                                   :+:+:  :+:    :+: :+:    :+: :+:     :+:     */
+/*   vector_test.cpp                                   :+:+:  :+:    :+: :+:    :+: :+:     :+:     */
 /*                                                      +:+         +:+        +:+        +:+       */
 /*   By: mamoussa <mamoussa@student.1337.ma>           +#+      +#++:      +#++:        +#+         */
 /*                                                    +#+         +#+        +#+      +#+           */
@@ -41,7 +41,7 @@ time_t get_time(void)
 #if 1
 void iterator_tests(void)
 {
-    std::cout << "\033[1;36m<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Vector iterator tests >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m\n\n";
+    std::cout << "\033[1;36m<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< vector iterator tests >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m\n\n";
     /*------------ std::vector ---------*/
     std::vector<int> v(3, 4);
     std::vector<int>::iterator it, it1;
@@ -142,7 +142,7 @@ void iterator_tests(void)
 
 void const_iterator_tests(void)
 {
-    std::cout << "\033[1;36m<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Vector const_iterator tests >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m\n\n";
+    std::cout << "\033[1;36m<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< vector const_iterator tests >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\033[0m\n\n";
     /*------------ std::vector ---------*/
     std::vector<int> v(3, 4);
     std::vector<int>::const_iterator it, it1;
