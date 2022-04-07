@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 11:22:11 by ibaali            #+#    #+#             */
-/*   Updated: 2022/03/19 18:29:10 by fbouibao         ###   ########.fr       */
+/*   Updated: 2022/04/07 17:54:13 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ namespace ft {
 
 		map_iterator(const map_iterator &it) { *this = it; }
 
-		operator map_iterator<const value_type, const Node, Tree>() const {
+		operator map_iterator<const value_type, const Node, Tree>() {
 			return (map_iterator<const value_type, const Node, Tree>(*_tree, _node));
 		}
 
