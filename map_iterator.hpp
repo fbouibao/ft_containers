@@ -6,7 +6,7 @@
 /*   By: fbouibao <fbouibao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 11:22:11 by ibaali            #+#    #+#             */
-/*   Updated: 2022/04/07 17:54:13 by fbouibao         ###   ########.fr       */
+/*   Updated: 2022/04/08 14:14:41 by fbouibao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ namespace ft {
 			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::pointer			pointer;
 			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::reference			reference;
 			typedef typename	base_iterator<std::bidirectional_iterator_tag, value_type_pair >::iterator_category	iterator_category;
+			typedef 			map_iterator<const value_type, const Node, Tree>  const_iterator;
 		public:
 			Tree * _tree;
 			Node * _node;
@@ -52,8 +53,8 @@ namespace ft {
 
 		map_iterator(const map_iterator &it) { *this = it; }
 
-		operator map_iterator<const value_type, const Node, Tree>() {
-			return (map_iterator<const value_type, const Node, Tree>(*_tree, _node));
+		operator const_iterator() {
+			return (const_iterator(*_tree, _node));
 		}
 
 		Node	*	base () const { return (_node); }

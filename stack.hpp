@@ -6,57 +6,58 @@ namespace ft{
     template <class T, class Container = ft::vector<T> >
     class stack
     {
-        typedef     T   value_type;
-        typedef     Container   container_type;
-        typedef     size_t   size_type;
+        public:
+            typedef     T   value_type;
+            typedef     Container   container_type;
+            typedef     size_t   size_type;
         
-    private:
-        container_type vec;
+    protected:
+        container_type c;
     public:
-        explicit stack (const container_type& ctnr = container_type()) : vec(ctnr){}    
+        explicit stack (const container_type& ctnr = container_type()) : c(ctnr){}    
 
         bool empty() const
         {
-            return (vec.empty());
+            return (c.empty());
         }
 
         size_type size() const
         {
-            return (vec.size());
+            return (c.size());
         }
 
         value_type& top()
         {
-            return (vec.back());
+            return (c.back());
         }
 
         const value_type& top() const
         {
-            return (vec.back());
+            return (c.back());
         }
 
         void push (const value_type& val)
         {
-            vec.push_back(val);
+            c.push_back(val);
         }
 
         void pop()
         {
-            vec.pop_back();
+            c.pop_back();
         }
 
         template <class Tp, class Cntr>
-        friend bool operator == (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.vec == rhs.vec);}
+        friend bool operator == (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.c == rhs.c);}
         template <class Tp, class Cntr>
-        friend bool operator != (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (!(lhs.vec == rhs.vec));}
+        friend bool operator != (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (!(lhs.c == rhs.c));}
         template <class Tp, class Cntr>
-        friend bool operator <  (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.vec < rhs.vec);}
+        friend bool operator <  (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.c < rhs.c);}
         template <class Tp, class Cntr>
-        friend bool operator <= (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.vec <= rhs.vec);}
+        friend bool operator <= (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.c <= rhs.c);}
         template <class Tp, class Cntr>
-        friend bool operator >  (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.vec > rhs.vec);}
+        friend bool operator >  (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.c > rhs.c);}
         template <class Tp, class Cntr>
-        friend bool operator >= (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.vec >= rhs.vec);}
+        friend bool operator >= (const stack<Tp, Cntr>& lhs, const stack<Tp, Cntr>& rhs) { return (lhs.c >= rhs.c);}
 
     };
 }
