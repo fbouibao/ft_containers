@@ -193,7 +193,6 @@ namespace ft{
             // return (tmp);
             if (balance > 1 && this->_ob_c(k, node->left->value->first) == true)
             {
-
                 node = rotate_right(node);
             }
             // return (tmp);
@@ -215,11 +214,6 @@ namespace ft{
                 node = rotate_left(node);
             }
             this->_node = get_head(node);
-            // std::cout << this->_node->value->first << " " << this->_node->value->second <<  std::endl;
-                // std::cout << "here4" << std::endl;
-
-            // std::cout << this->_node->value->first << " " << this->_node->value->second <<  std::endl;
-
             return (tmp);
         }
 

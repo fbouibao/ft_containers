@@ -19,8 +19,8 @@ namespace ft{
         typedef typename allocator_type::pointer           				pointer;
         typedef typename allocator_type::const_pointer      			const_pointer;
         typedef std::size_t												size_type;
-        typedef ft::iter<pointer>										iterator;
-        typedef ft::iter<const_pointer>							        const_iterator;
+        typedef ft::iter<T>										iterator;
+        typedef ft::iter<const T>							        const_iterator;
         typedef ft::reverse_iterator<iterator>						    reverse_iterator;
         typedef ft::reverse_iterator    <const_iterator>				const_reverse_iterator;
         typedef std::ptrdiff_t                                          difference_type;
@@ -32,7 +32,6 @@ namespace ft{
         
 
     public:
-
         //constructors
         explicit vector (const allocator_type& alloc = allocator_type())
         {
@@ -69,14 +68,14 @@ namespace ft{
             }
         }
             
-	vector (const vector& x)
-	{
-		this->_array = nullptr;
-		this->_size = 0;
-		this->_capacity = 0;
-		this->_alloc = allocator_type();
-		*this = x;	
-	}
+        vector (const vector& x)
+        {
+            this->_array = nullptr;
+            this->_size = 0;
+            this->_capacity = 0;
+            this->_alloc = allocator_type();
+            *this = x;	
+        }
 
         //destructor
         ~vector()
@@ -88,31 +87,26 @@ namespace ft{
             }
         }
 
-
-
-
         //assignement operator
-        	vector& operator=(const vector& x)
-	{
-		if (*this != x)
-		{
-			// this->this->_alloc = x.this->_alloc;
-			for (size_type i = 0; i < this->_size; i++)
-				this->_alloc.destroy(this->_array + i);
-			if (this->_capacity > 0)
-				this->_alloc.deallocate(_array, this->_capacity);
-			if (this->capacity() < x.capacity())
-					this->_capacity = x._capacity;
-		
-			this->_size = x._size;
-			this->_array = this->_alloc.allocate(this->_capacity);
-			for(size_type i = 0; i < x._size; i++)
-				this->_alloc.construct(this->_array + i, x._array[i]);
-		}
-		return *this;
-	}
-
-
+        vector& operator=(const vector& x)
+        {
+            if (*this != x)
+            {
+                // this->this->_alloc = x.this->_alloc;
+                for (size_type i = 0; i < this->_size; i++)
+                    this->_alloc.destroy(this->_array + i);
+                if (this->_capacity > 0)
+                    this->_alloc.deallocate(_array, this->_capacity);
+                if (this->capacity() < x.capacity())
+                        this->_capacity = x._capacity;
+            
+                this->_size = x._size;
+                this->_array = this->_alloc.allocate(this->_capacity);
+                for(size_type i = 0; i < x._size; i++)
+                    this->_alloc.construct(this->_array + i, x._array[i]);
+            }
+            return *this;
+        }
 
         //Iterators:
         iterator begin()
@@ -204,8 +198,6 @@ namespace ft{
                 this->_capacity = n;
             }
         }
-
-
 
         //element acces
         reference operator[] (size_type n)
@@ -418,22 +410,23 @@ namespace ft{
         {
             return (this->_alloc);
         }
-    reverse_iterator rbegin()
-	{
-		return (reverse_iterator(end()));
-	}
-	const_reverse_iterator rbegin() const
-	{
-		return(const_reverse_iterator(end()));
-	}
-	reverse_iterator rend()
-	{
-		return (reverse_iterator(begin()));
-	}
-	const_reverse_iterator	rend ()		const	
-	{ 
-		return (const_reverse_iterator(begin())); 
-	}
+
+        reverse_iterator rbegin()
+        {
+            return (reverse_iterator(end()));
+        }
+        const_reverse_iterator rbegin() const
+        {
+            return(const_reverse_iterator(end()));
+        }
+        reverse_iterator rend()
+        {
+            return (reverse_iterator(begin()));
+        }
+        const_reverse_iterator	rend ()		const	
+        {
+            return (const_reverse_iterator(begin())); 
+        }
     };
 
     template <class T, class Alloc>
@@ -441,7 +434,6 @@ namespace ft{
     {
         x.swap(y);
     }
-
 
 	template <class T, class Alloc>
 	bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
@@ -457,28 +449,28 @@ namespace ft{
   	{
 		  return !(lhs == rhs);
   	}
+
     template <class T, class Alloc>
     bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
         return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
     }
+
     template <class T, class Alloc>
     bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
         return (!(lhs > rhs));
     }
+
     template <class T, class Alloc>
     bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
         return (rhs < lhs);
     }
+
     template <class T, class Alloc>
     bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
         return (!(lhs < rhs));
     }
-
-
-
-
 }

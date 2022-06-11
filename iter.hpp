@@ -10,33 +10,30 @@ namespace ft{
     template<class T>
     class iter
     {
-        public:
-            typedef T					                                iterator_type;
-			typedef typename ft::iterator_traits<T>::value_type			value_type;
-			typedef typename ft::iterator_traits<T>::pointer			pointer;
-			typedef typename ft::iterator_traits<T>::reference			reference;
-			typedef typename ft::iterator_traits<T>::difference_type	difference_type;
-			typedef typename ft::iterator_traits<T>::iterator_category  iterator_category;
-
+    public:
+		typedef	std::ptrdiff_t						difference_type;
+		typedef	T									value_type;
+		typedef	T*									pointer;
+		typedef	T&									reference;
+		typedef	std::random_access_iterator_tag		iterator_category;
 
     private:
-        iterator_type itr;
+        pointer itr;
 
     public:
         // constructors
         iter() : itr(NULL) { }
-        explicit iter(iterator_type it) : itr(it) { }
+        explicit iter(pointer it) : itr(it) { }
         template<typename it2>
         iter(const iter<it2> &i) : itr(i.base()){ }
 
         // getter
-        iterator_type base() const
+        pointer base() const
         {
             return (this->itr);
         }
 
         // operators
-
         iter& operator=(const iter& i)
         {
             this->itr = i.itr;
@@ -89,7 +86,7 @@ namespace ft{
             return (tmp);
         }
 
-        iter operator-(difference_type indx)  const
+        iter operator- (difference_type indx)  const
         {
             return (iter(this->itr - indx));
         }
